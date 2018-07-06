@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/dark_gray">
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/scanner_toolbar_back"
+            android:layout_width="69px"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15px"
+            android:src="@mipmap/ic_back_white"/>
+
+        <TextView
+            android:id="@+id/scanner_toolbar_title"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="二维码/条码"
+            android:textColor="#fff"
+            android:textSize="16sp"/>
+
+
+        <ImageView
+            android:layout_alignParentRight="true"
+            android:id="@+id/iv_flashlight"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingRight="30px"
+            android:paddingLeft="20px"
+            android:layout_marginRight="90px"
+            android:src="@mipmap/ic_flashlight"/>
+
+        <ImageView
+            android:id="@+id/iv_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingRight="30px"
+            android:paddingLeft="20px"
+            android:layout_marginLeft="70px"
+            android:layout_toLeftOf="@+id/iv_flashlight"
+            android:layout_marginRight="90px"
+            android:src="@mipmap/ic_photo"/>
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+
+</android.support.v7.widget.Toolbar>

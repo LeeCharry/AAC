@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/scanner_toolbar"/>
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <SurfaceView
+            android:id="@+id/scanner_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"/>
+
+        <!--
+
+                           app:mask_color="@color/viewfinder_mask"
+
+                            app:result_color="@color/result_view"
+            app:result_point_color="@color/result_point_color"
+        -->
+        <com.shyohan.aac.google.zxing.view.ViewfinderView
+            app:label_text="@string/scan_prompt_content"
+            android:id="@+id/viewfinder_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:corner_color="@color/white"
+            app:frame_color="@color/viewfinder_frame"
+            app:label_text_color="@color/white"
+            app:label_text_size="45"
+            app:laser_color="@color/colorPrimary"
+            />
+        <TextView
+            android:layout_marginTop="100px"
+            android:textColor="@color/white"
+            android:textSize="@dimen/title_size_50_px"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/arl"
+            android:layout_width="543px"
+            android:layout_height="136px"
+            android:gravity="center"
+            android:visibility="gone"
+            android:text="@string/scan_prompt_content"/>
+    </com.zhy.autolayout.AutoRelativeLayout>
+</com.zhy.autolayout.AutoLinearLayout>

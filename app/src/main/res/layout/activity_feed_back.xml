@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.shyohan.aac.activity.DeliveryActivity">
+
+    <include layout="@layout/layout_title" />
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="140px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:paddingLeft="50px"
+            android:paddingRight="50px"
+            android:text="@string/name"
+            android:textColor="@color/black"
+            android:textSize="@dimen/home_left_text_size_45_px" />
+
+        <EditText
+            android:id="@+id/et_name"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="@string/please_input_name"
+            android:paddingLeft="50px"
+            android:textColor="@color/textcolor_b5b5b6"
+            android:textSize="@dimen/home_left_text_size_45_px" />
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <View style="@style/style_line" />
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="140px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:paddingLeft="50px"
+
+            android:paddingRight="50px"
+            android:text="@string/phone_no"
+            android:textColor="@color/black"
+            android:textSize="@dimen/home_left_text_size_45_px" />
+
+        <EditText
+            android:id="@+id/et_phone"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="@string/please_input_phone_no"
+            android:paddingLeft="50px"
+            android:textColor="@color/textcolor_b5b5b6"
+            android:textSize="@dimen/home_left_text_size_45_px" />
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <View style="@style/style_line" />
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="400px">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:background="@null"
+            android:gravity="center_horizontal"
+            android:paddingLeft="50px"
+            android:paddingRight="50px"
+            android:paddingTop="45px"
+            android:text="@string/feed_back_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/home_left_text_size_45_px" />
+
+        <EditText
+            android:id="@+id/et_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="30px"
+            android:layout_marginRight="40px"
+            android:layout_marginTop="30px"
+            android:layout_weight="1"
+            android:background="#1100fe00"
+            android:gravity="start"
+            android:paddingTop="20px"
+            android:paddingBottom="20px"
+            android:hint="@string/please_input_feed_back_content"
+            android:paddingLeft="50px"
+            android:textColor="@color/textcolor_b5b5b6"
+            android:textSize="@dimen/home_left_text_size_45_px" />
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <View style="@style/style_line" />
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="match_parent"
+        android:layout_height="127px"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="120px"
+        android:layout_marginRight="120px"
+        android:layout_marginTop="173px"
+        android:background="@color/colorPrimary"
+        android:text="@string/submit"
+        android:textColor="@color/white"
+        android:textSize="40px" />
+
+</com.zhy.autolayout.AutoLinearLayout>

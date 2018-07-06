@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="684px"
+    android:layout_height="369px"
+    android:orientation="vertical"
+    android:background="@drawable/sl_logout_sp">
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="233px"
+    android:textSize="63px"
+    android:textColor="#3E3A39"
+    android:gravity="center"
+    android:text="@string/are_you_sure_to_logout"
+    />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#B6B5B5"/>
+    <com.zhy.autolayout.AutoLinearLayout
+        android:orientation="horizontal"
+        android:layout_width="684px"
+        android:layout_height="136px">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:textSize="63px"
+            android:textColor="#B6B5B5"
+            android:gravity="center"
+            android:text="@string/cancel"
+            android:background="@drawable/btn_selector"
+            android:id="@+id/tv_cancel"
+            />
+        <View
+            android:layout_width="1px"
+            android:layout_marginTop="8px"
+            android:layout_marginBottom="8px"
+            android:layout_height="match_parent"
+            android:background="#B6B5B5"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:textSize="63px"
+            android:background="@drawable/btn_selector"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center"
+            android:text="@string/confirm"
+            android:id="@+id/tv_confirm"
+            />
+    </com.zhy.autolayout.AutoLinearLayout>
+</com.zhy.autolayout.AutoLinearLayout>

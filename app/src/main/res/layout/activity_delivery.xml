@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.shyohan.aac.activity.DeliveryActivity">
+    <include layout="@layout/layout_title"/>
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_marginTop="219px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_marginTop="38px"
+
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@+id/tv_select"
+            android:src="@mipmap/ic_ok"
+            android:layout_width="221px"
+            android:layout_height="221px"
+            android:id="@+id/iv_select"
+            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="75px"
+                android:layout_gravity="center_horizontal"
+                android:text="2018/6/25 12:28"
+                android:id="@+id/tv_date"
+                android:gravity="center_vertical"
+                android:textColor="@color/textcolor_3e3a39"
+                android:textSize="@dimen/home_left_text_size_45_px"
+                />
+            <TextView
+                android:layout_marginTop="33px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/yiqianshou"
+                android:id="@+id/tv_is_sign"
+                android:gravity="center_vertical"
+                android:textColor="@color/textcolor_3e3a39"
+                android:textSize="@dimen/home_left_text_size_45_px"
+                />
+
+        </com.zhy.autolayout.AutoLinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="127px"
+        android:text="@string/confirm"
+        android:textSize="40px"
+        android:id="@+id/btn_confirm"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="253px"
+        android:layout_marginLeft="151px"
+        android:layout_marginRight="151px"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimary"/>
+
+</com.zhy.autolayout.AutoLinearLayout>

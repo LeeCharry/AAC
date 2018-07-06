@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.zhy.autolayout.AutoLinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_weight="5"
+        android:gravity="center_horizontal"
+        android:layout_height="234px">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="昨天"
+            android:textSize="39px"
+            android:id="@+id/tv_date"
+            android:textColor="@color/textcolor_3e3a39"/>
+        <TextView
+            android:layout_marginTop="14px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="09:38"
+            android:textSize="25px"
+            android:id="@+id/tv_time"
+            android:textColor="@color/textcolor_3e3a39"/>
+    </com.zhy.autolayout.AutoLinearLayout>
+    <ImageView
+        android:id="@+id/iv_state"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_big_dot_line"/>
+    <com.zhy.autolayout.AutoLinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_weight="24"
+        android:paddingLeft="44px"
+        android:paddingRight="100px"
+        android:layout_height="234px">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="派送中"
+            android:textSize="39px"
+            android:id="@+id/tv_state"
+            android:textColor="@color/textcolor_3e3a39"/>
+        <TextView
+            android:layout_marginTop="14px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="【上海市】上海某小区某服务部派件员李三三13878675643正在为您派件"
+            android:textSize="35px"
+            android:id="@+id/tv_details"
+            android:textColor="#898989"/>
+    </com.zhy.autolayout.AutoLinearLayout>
+</com.zhy.autolayout.AutoLinearLayout>

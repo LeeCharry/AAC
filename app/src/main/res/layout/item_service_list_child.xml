@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <com.zhy.autolayout.AutoLinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="90px"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:paddingLeft="90px"
+            android:id="@+id/tv_child"
+            android:paddingRight="73px"
+            android:text="@string/question_and_answer"
+            android:textColor="@color/black"
+            android:textSize="@dimen/home_left_text_size_45_px" />
+    </com.zhy.autolayout.AutoLinearLayout>

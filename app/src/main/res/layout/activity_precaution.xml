@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context="com.shyohan.aac.activity.DeliveryActivity">
+    <include layout="@layout/layout_title" />
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="133px"
+            android:layout_gravity="center_horizontal"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:paddingLeft="90px"
+            android:id="@+id/tv_question_answer"
+            android:paddingRight="73px"
+            android:drawableRight="@mipmap/ic_select"
+            android:text="@string/question_and_answer"
+            android:textColor="@color/black"
+            android:textSize="@dimen/home_left_text_size_45_px" />
+
+      <View style="@style/style_line2"
+          />
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="133px"
+            android:layout_gravity="center_horizontal"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:paddingLeft="90px"
+            android:id="@+id/tv_instructions"
+            android:paddingRight="73px"
+            android:drawableRight="@mipmap/ic_select"
+            android:text="@string/app_instructions"
+            android:textColor="@color/black"
+            android:textSize="@dimen/home_left_text_size_45_px" />
+
+        <View
+            style="@style/style_line2"/>
+    </com.zhy.autolayout.AutoLinearLayout>
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="133px"
+            android:layout_gravity="center_horizontal"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:paddingLeft="90px"
+            android:id="@+id/tv_consignment_notes"
+            android:paddingRight="73px"
+            android:drawableRight="@mipmap/ic_select"
+            android:text="@string/consignment_notes"
+            android:textColor="@color/black"
+            android:textSize="@dimen/home_left_text_size_45_px" />
+        <View
+            style="@style/style_line2"/>
+    </com.zhy.autolayout.AutoLinearLayout>
+</com.zhy.autolayout.AutoLinearLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="181px"
+    android:layout_marginBottom="16px"
+    android:background="@color/white"
+    android:gravity="center_vertical">
+    <RadioButton
+        android:layout_width="61px"
+        android:layout_height="61px"
+        android:id="@+id/rb"
+        android:button="@null"
+        android:background="@drawable/sl_is_selected"
+        android:layout_marginLeft="89px"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="55px"
+        android:layout_marginLeft="44px"
+        android:textColor="@color/textcolor_3e3a39"
+        android:text=""
+        android:id="@+id/tv_express_name"
+        />
+</com.zhy.autolayout.AutoLinearLayout>
