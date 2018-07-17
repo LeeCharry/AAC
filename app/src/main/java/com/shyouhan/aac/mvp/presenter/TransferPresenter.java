@@ -58,7 +58,6 @@ public class TransferPresenter extends BasePresenter<TransferContract.Model,Tran
                             }else{
                                 mRootview.onTransferFailed(baseObject.getMsg());
                             }
-
                         }
                     }
                 });
