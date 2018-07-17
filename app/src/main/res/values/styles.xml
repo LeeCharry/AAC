@@ -7,7 +7,6 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
-
     </style>
 
     <!--<style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar"/>-->
@@ -31,8 +30,6 @@
             name="android:windowContentOverlay">@null</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <!--
@@ -45,13 +42,6 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">3px</item>
         <item name="android:background">@color/title_bg_ltgray</item>
-    </style>
-
-    <style name="style_line2">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">3px</item>
-        <item name="android:background">@color/title_bg_ltgray</item>
-        <item name="android:layout_marginLeft">90px</item>
     </style>
 
     <style name="style_logout_dialog" parent="Base.Theme.AppCompat.Dialog">

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.shyohan.aac.activity.ShipmentInquiryActivity">
+    tools:context="com.shyouhan.aac.activity.ShipmentInquiryActivity">
     <include layout="@layout/layout_title"/>
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

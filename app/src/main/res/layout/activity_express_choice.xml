@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.shyohan.aac.activity.DeliveryActivity">
+    tools:context="com.shyouhan.aac.activity.DoSuccessActivity">
     <include layout="@layout/layout_title" />
-
     <android.support.v7.widget.RecyclerView
         android:layout_marginTop="28px"
         android:id="@+id/rv"
@@ -25,5 +23,5 @@
         android:layout_marginLeft="151px"
         android:layout_marginRight="151px"
         android:textColor="@color/white"
-        android:background="@color/colorPrimary"/>
+        android:background="@drawable/bt_bg_selector"/>
 </com.zhy.autolayout.AutoLinearLayout>

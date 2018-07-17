@@ -19,7 +19,6 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okio.Buffer;
 import okio.BufferedSource;
-import timber.log.Timber;
 
 /**
  * Created by wanglei on 2016/12/24.
@@ -40,22 +39,22 @@ public class XInterceptor implements Interceptor {
         if (request.body() != null) {
             request.body().writeTo(requestbuffer);
         } else {
-            Timber.tag("Request").d("request.body() == null");
+//            Timber.tag("Request").d("request.body() == null");
         }
         if (handler != null) {
             request = handler.onBeforeRequest(request, chain);
         }
 
-        //打印url信息
-        Timber.tag("Request").d("Sending Request %s on %n Params --->  %s%n Connection ---> %s%n Headers ---> %s", request.url()
-                , request.body() != null ? requestbuffer.readUtf8() : "null"
-                , chain.connection()
-                , request.headers());
+//        //打印url信息
+//        Timber.tag("Request").d("Sending Request %s on %n Params --->  %s%n Connection ---> %s%n Headers ---> %s", request.url()
+//                , request.body() != null ? requestbuffer.readUtf8() : "null"
+//                , chain.connection()
+//                , request.headers());
         long t1 = System.nanoTime();
         Response response = chain.proceed(request);
         long t2 = System.nanoTime();
         //打赢响应时间
-        Timber.tag("Response").d("Received response  in %.1fms%n%s", (t2 - t1) / 1e6d, response.headers());
+//        Timber.tag("Response").d("Received response  in %.1fms%n%s", (t2 - t1) / 1e6d, response.headers());
 
         //读取服务器返回的结果
         ResponseBody responseBody = response.body();
@@ -93,7 +92,7 @@ public class XInterceptor implements Interceptor {
             bodyString = clone.readString(charset);
         }
 
-        Timber.tag("Result").d(jsonFormat(bodyString));
+//        Timber.tag("Result").d(jsonFormat(bodyString));
         if (handler != null) {
             response = handler.onAfterRequest(response, bodyString, chain);
         }

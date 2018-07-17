@@ -1,44 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="298px"
     android:background="@color/white"
-    android:layout_marginBottom="28px"
-    android:paddingLeft="77px"
-    android:paddingTop="45px"
-    android:paddingBottom="45px"
-    android:orientation="vertical">
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1"
-    android:text="AAC誉得闽行站点"
-    android:id="@+id/tv_site_name"
-    android:gravity="center_vertical"
-    android:textColor="#3E3A39"
-    android:textSize="@dimen/home_left_text_size_45_px"
-    />
-    <TextView
-        android:layout_marginTop="10px"
+    android:layout_marginTop="15px"
+    android:layout_height="298px">
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_toLeftOf="@+id/iv_call"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:text="地址：上海市闵行区东川路888号"
-        android:id="@+id/tv_site_addr"
-        android:gravity="center_vertical"
-        android:textColor="#898989"
-        android:textSize="@dimen/home_left_text_size_45_px"
-        />
+        android:layout_height="298px"
+        android:layout_marginBottom="28px"
+        android:paddingLeft="77px"
+        android:paddingTop="45px"
+        android:paddingBottom="45px"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text=""
+            android:id="@+id/tv_site_name"
+            android:gravity="center_vertical"
+            android:textColor="#3E3A39"
+            android:textSize="@dimen/home_left_text_size_45_px"
+            android:singleLine="true"
+            />
+        <TextView
+            android:singleLine="true"
+            android:layout_marginTop="10px"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text=""
+            android:id="@+id/tv_site_addr"
+            android:gravity="center_vertical"
+            android:textColor="#898989"
+            android:textSize="@dimen/home_left_text_size_45_px"
+            />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:text="电话：021-12345678"
-        android:id="@+id/tv_site_phone"
-        android:gravity="center_vertical"
-        android:textColor="#898989"
-        android:textSize="@dimen/home_left_text_size_45_px"
-        />
-
-</com.zhy.autolayout.AutoLinearLayout>
+        <TextView
+            android:singleLine="true"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text=""
+            android:id="@+id/tv_site_phone"
+            android:gravity="center_vertical"
+            android:textColor="#898989"
+            android:textSize="@dimen/home_left_text_size_45_px"
+            />
+    </com.zhy.autolayout.AutoLinearLayout>
+    <ImageView
+        android:id="@+id/iv_call"
+        android:layout_width="110px"
+        android:layout_height="110px"
+        android:scaleType="fitXY"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="40px"
+        android:src="@mipmap/ic_call"/>
+</com.zhy.autolayout.AutoRelativeLayout>

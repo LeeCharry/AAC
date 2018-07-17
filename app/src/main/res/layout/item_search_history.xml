@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<com.shyohan.aac.widget.SwipeItemLayout-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="match_parent" android:layout_height="40dp">-->
+    <com.zhy.autolayout.AutoLinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent" android:layout_height="135px"
+        android:background="#99ffffff"
+        android:paddingLeft="50px">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="133px"
+            android:textSize="45px"
+            android:gravity="start|center_vertical"
+            android:textColor="#aa000000"
+            android:text=""
+            android:id="@+id/tv_waybill"
+            />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/title_bg_ltgray"/>
+    </com.zhy.autolayout.AutoLinearLayout>
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/main"-->
+        <!--android:layout_width="match_parent" android:layout_height="match_parent"-->
+        <!--android:background="#99ffffff"-->
+        <!--android:paddingLeft="50px"-->
+        <!--android:layout_marginTop="10px">-->
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="50px"-->
+            <!--android:gravity="start|center_vertical"-->
+            <!--android:paddingLeft="50px"-->
+            <!--android:textColor="@color/black"-->
+            <!--android:paddingTop="40px"-->
+            <!--android:id="@+id/tv_waybill"-->
+            <!--android:text="222222"-->
+            <!--android:paddingBottom="40px"-->
+            <!--/>-->
+    <!--</RelativeLayout>-->
+    <!--<LinearLayout-->
+        <!--android:visibility="gone"-->
+        <!--android:layout_width="wrap_content" android:layout_height="match_parent"-->
+        <!--android:background="#99ffffff"-->
+        <!--android:layout_marginTop="10px">-->
+        <!--<TextView-->
+            <!--android:layout_width="340px"-->
+            <!--android:background="#aaff0000"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:textSize="50px"-->
+            <!--android:gravity="center"-->
+            <!--android:textColor="@color/black"-->
+            <!--android:text="@string/delete"-->
+            <!--android:id="@+id/tv_delete"-->
+            <!--/>-->
+    <!--</LinearLayout>-->
+<!--</com.shyohan.aac.widget.SwipeItemLayout>-->
+

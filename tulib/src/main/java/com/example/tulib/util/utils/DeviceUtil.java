@@ -17,7 +17,6 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.example.tulib.R;
-import com.example.tulib.util.base.XActivity;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -52,9 +51,9 @@ public class DeviceUtil {
         byte[] digest = messageDigest.digest(text.getBytes());
 
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < digest.length; i++) {
+        for (byte aDigest : digest) {
             //循环每个字符 将计算结果转化为正整数;
-            int digestInt = digest[i] & 0xff;
+            int digestInt = aDigest & 0xff;
             //将10进制转化为较短的16进制
             String hexString = Integer.toHexString(digestInt);
             //转化结果如果是个位数会省略0,因此判断并补0
@@ -67,6 +66,7 @@ public class DeviceUtil {
         //返回整个结果
         return sb.toString();
     }
+
 
     /**
      * 获取状态栏高度
@@ -187,7 +187,7 @@ public class DeviceUtil {
                                             @IntRange(from = 0, to = 255) int statusBarAlpha) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 
-            ViewGroup contentView = ((ViewGroup) activity.findViewById(android.R.id.content));
+            ViewGroup contentView = activity.findViewById(android.R.id.content);
             View rootView = contentView.getChildAt(0);
             int statusBarHeight = getStatusBarHeight(activity);
             if (rootView != null && rootView instanceof CoordinatorLayout) {
@@ -238,7 +238,7 @@ public class DeviceUtil {
             return;
         }
         transparentStatusBar(activity);
-        ViewGroup contentView = (ViewGroup) activity.findViewById(android.R.id.content);
+        ViewGroup contentView = activity.findViewById(android.R.id.content);
         // 移除半透明矩形,以免叠加
         View fakeStatusBarView = contentView.findViewById(FAKE_STATUS_BAR_VIEW_ID);
         if (fakeStatusBarView != null) {
@@ -630,7 +630,7 @@ public class DeviceUtil {
      * @param statusBarAlpha 透明值
      */
     private static void addTranslucentView(Activity activity, @IntRange(from = 0, to = 255) int statusBarAlpha) {
-        ViewGroup contentView = (ViewGroup) activity.findViewById(android.R.id.content);
+        ViewGroup contentView = activity.findViewById(android.R.id.content);
         View fakeTranslucentView = contentView.findViewById(FAKE_TRANSLUCENT_VIEW_ID);
         if (fakeTranslucentView != null) {
             if (fakeTranslucentView.getVisibility() == View.GONE) {
@@ -676,7 +676,7 @@ public class DeviceUtil {
      * 设置根布局参数
      */
     private static void setRootView(Activity activity) {
-        ViewGroup parent = (ViewGroup) activity.findViewById(android.R.id.content);
+        ViewGroup parent = activity.findViewById(android.R.id.content);
         for (int i = 0, count = parent.getChildCount(); i < count; i++) {
             View childView = parent.getChildAt(i);
             if (childView instanceof ViewGroup) {

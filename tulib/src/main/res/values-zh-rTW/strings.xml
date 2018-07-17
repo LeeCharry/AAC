@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Tulib</string>
+    <string name="is_loading">加載中...</string>
+</resources>

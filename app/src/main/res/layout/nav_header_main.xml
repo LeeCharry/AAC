@@ -3,235 +3,259 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/ll_login_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_head"
+            android:layout_width="220px"
+            android:layout_height="220px"
+            android:layout_gravity="center"
+            android:layout_marginTop="198px"
+            android:paddingTop="@dimen/nav_header_vertical_spacing"
+            app:srcCompat="@mipmap/ic_login_head" />
+
+        <TextView
+            android:id="@+id/tv_staffer_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="42px"
+            android:text="@string/staffer_login"
+            android:textColor="#221814"
+            android:textSize="50px" />
+    </com.zhy.autolayout.AutoLinearLayout>
 
     <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ll_login_head"
-        android:orientation="vertical">
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="201px"
-            android:layout_height="201px"
-            android:paddingTop="@dimen/nav_header_vertical_spacing"
-            android:layout_marginTop="198px"
-            app:srcCompat="@mipmap/ic_login_head"
-            android:layout_gravity="center"/>
-
-        <TextView
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-                android:textColor="#221814"
-            android:id="@+id/tv_staffer_login"
-            android:textSize="50px"
-            android:text="@string/staffer_login"
-            android:layout_marginTop="42px"/>
-    </com.zhy.autolayout.AutoLinearLayout>
-    <com.zhy.autolayout.AutoLinearLayout
         android:layout_marginTop="130px"
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
+        android:orientation="vertical">
+
         <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-            <com.zhy.autolayout.AutoLinearLayout
+            android:layout_height="185px"
+            android:orientation="horizontal">
+
+            <com.zhy.autolayout.AutoRelativeLayout
+                android:id="@+id/ll_reward"
                 android:layout_width="0dp"
-                android:orientation="vertical"
-                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:id="@+id/ll_reward">
+                android:gravity="center"
+                android:orientation="vertical">
+
                 <ImageView
+                    android:layout_centerHorizontal="true"
                     android:layout_width="103px"
                     android:layout_height="103px"
-                    android:src="@mipmap/ic_reward"/>
+                    android:src="@mipmap/ic_reward" />
+
                 <TextView
-                    android:layout_marginTop="40px"
+                    android:id="@+id/tv_reward"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/home_left_text_size_45_px"
-                    android:text="@string/reward"
-                    android:id="@+id/tv_reward"
-                    android:textColor="#717071"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
                     android:gravity="center"
-                  />
-            </com.zhy.autolayout.AutoLinearLayout>
+                    android:text="@string/reward"
+                    android:textColor="#717071"
+                    android:textSize="@dimen/home_left_text_size_45_px" />
+            </com.zhy.autolayout.AutoRelativeLayout>
 
-            <com.zhy.autolayout.AutoLinearLayout
+            <com.zhy.autolayout.AutoRelativeLayout
+                android:id="@+id/ll_shipping"
                 android:layout_width="0dp"
-                android:orientation="vertical"
-                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:id="@+id/ll_shipping">
+                android:background="@drawable/btn_selector"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
                 <ImageView
                     android:layout_width="177px"
                     android:layout_height="103px"
-                    android:src="@mipmap/ic_shipping"/>
+                    android:src="@mipmap/ic_shipping" />
+
                 <TextView
-                    android:layout_marginTop="40px"
+                    android:id="@+id/tv_shipping"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/home_left_text_size_45_px"
+                    android:gravity="center"
                     android:text="@string/shipping"
                     android:textColor="#717071"
-                    android:id="@+id/tv_shipping"
-                    android:gravity="center"
-                    />
-            </com.zhy.autolayout.AutoLinearLayout>
-            <com.zhy.autolayout.AutoLinearLayout
+                    android:textSize="@dimen/home_left_text_size_45_px" />
+            </com.zhy.autolayout.AutoRelativeLayout>
+
+            <com.zhy.autolayout.AutoRelativeLayout
+                android:id="@+id/ll_arrival_station"
                 android:layout_width="0dp"
-                android:orientation="vertical"
-                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:id="@+id/ll_arrival_station">
+                android:gravity="center"
+                android:orientation="vertical">
+
                 <ImageView
+                    android:layout_centerHorizontal="true"
                     android:layout_width="158px"
-                    android:layout_height="103px"
-                    android:src="@mipmap/ic_arrival_station"/>
+                    android:layout_height="109px"
+                    android:src="@mipmap/ic_arrival_station" />
+
                 <TextView
-                    android:layout_marginTop="40px"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:id="@+id/tv_arrival_station"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/home_left_text_size_45_px"
-                    android:text="@string/arrival_station"
-                    android:id="@+id/tv_arrival_station"
-                    android:textColor="#717071"
                     android:gravity="center"
-                    />
-            </com.zhy.autolayout.AutoLinearLayout>
-        </com.zhy.autolayout.AutoLinearLayout>
-        <com.zhy.autolayout.AutoLinearLayout
-            android:layout_marginTop="90px"
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-            <com.zhy.autolayout.AutoLinearLayout
+                    android:text="@string/arrival_station"
+                    android:textColor="#717071"
+                    android:textSize="@dimen/home_left_text_size_45_px" />
+            </com.zhy.autolayout.AutoRelativeLayout>
+
+            <com.zhy.autolayout.AutoRelativeLayout
+                android:id="@+id/ll_transfer"
                 android:layout_width="0dp"
-                android:orientation="vertical"
-                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:id="@+id/ll_transfer">
+                android:gravity="center"
+                android:orientation="vertical">
+
                 <ImageView
+                    android:layout_centerHorizontal="true"
                     android:layout_width="108px"
                     android:layout_height="108px"
-                    android:src="@mipmap/ic_transfer"/>
+                    android:src="@mipmap/ic_transfer" />
+
                 <TextView
-                    android:layout_marginTop="40px"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:id="@+id/tv_transfer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/home_left_text_size_45_px"
-                    android:text="@string/transfer"
-                    android:id="@+id/tv_transfer"
-                    android:textColor="#717071"
                     android:gravity="center"
-                    />
-            </com.zhy.autolayout.AutoLinearLayout>
+                    android:text="@string/transfer"
+                    android:textColor="#717071"
+                    android:textSize="@dimen/home_left_text_size_45_px" />
+            </com.zhy.autolayout.AutoRelativeLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
 
-            <com.zhy.autolayout.AutoLinearLayout
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="189px"
+            android:layout_marginTop="90px"
+            android:orientation="horizontal">
+
+            <com.zhy.autolayout.AutoRelativeLayout
+                android:id="@+id/ll_delivery"
                 android:layout_width="0dp"
-                android:orientation="vertical"
-                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:id="@+id/ll_delivery">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/iv_delivery"
                     android:layout_width="125px"
                     android:layout_height="108px"
-
+                    android:layout_centerHorizontal="true"
                     android:src="@mipmap/ic_delivery" />
+
                 <TextView
-                    android:layout_below="@+id/iv_delivery"
-                    android:layout_marginTop="40px"
+                    android:id="@+id/tv_delivery"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/home_left_text_size_45_px"
-                    android:text="@string/delivery"
-                    android:id="@+id/tv_delivery"
-                    android:textColor="#717071"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
                     android:gravity="center"
-                    />
-            </com.zhy.autolayout.AutoLinearLayout>
+                    android:text="@string/delivery"
+                    android:textColor="#717071"
+                    android:textSize="@dimen/home_left_text_size_45_px" />
+            </com.zhy.autolayout.AutoRelativeLayout>
 
-            <com.zhy.autolayout.AutoLinearLayout
+            <com.zhy.autolayout.AutoRelativeLayout
+                android:id="@+id/ll_signing"
                 android:layout_width="0dp"
-                android:orientation="vertical"
-                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:id="@+id/ll_signing">
+                android:gravity="center"
+                android:orientation="vertical">
+
                 <ImageView
                     android:layout_width="108px"
                     android:layout_height="108px"
-                    android:src="@mipmap/ic_signing"/>
+                    android:src="@mipmap/ic_signing"
+                    android:layout_centerHorizontal="true"/>
+
                 <TextView
-                    android:layout_marginTop="40px"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/tv_signing"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/home_left_text_size_45_px"
-                    android:text="@string/signing"
-                    android:id="@+id/tv_signing"
-                    android:textColor="#717071"
                     android:gravity="center"
-                    />
-            </com.zhy.autolayout.AutoLinearLayout>
+                    android:text="@string/signing"
+                    android:textColor="#717071"
+                    android:textSize="@dimen/home_left_text_size_45_px" />
+            </com.zhy.autolayout.AutoRelativeLayout>
 
-        </com.zhy.autolayout.AutoLinearLayout>
-        <com.zhy.autolayout.AutoLinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="0dp"
-            android:layout_marginTop="90px"
-            android:layout_weight="1">
             <com.zhy.autolayout.AutoRelativeLayout
+                android:id="@+id/ll_logout"
                 android:layout_width="0dp"
-                android:orientation="vertical"
-                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:id="@+id/ll_logout">
+                android:gravity="center"
+                android:orientation="vertical">
+
                 <ImageView
+                    android:id="@+id/iv_login"
                     android:layout_width="98px"
                     android:layout_height="108px"
-                    android:id="@+id/iv_login"
-                    android:src="@mipmap/ic_logout"/>
+                    android:layout_centerHorizontal="true"
+                    android:src="@mipmap/ic_logout" />
+
                 <TextView
-                    android:layout_below="@+id/iv_login"
-                    android:layout_marginTop="40px"
+                    android:id="@+id/tv_logout"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/home_left_text_size_45_px"
-                    android:text="@string/logout"
-                    android:id="@+id/tv_logout"
-                    android:textColor="#717071"
-                    android:gravity="center"
                     android:layout_gravity="bottom|center_horizontal"
-                    />
+                    android:gravity="center"
+                    android:text="@string/logout"
+                    android:textColor="#717071"
+                    android:textSize="@dimen/home_left_text_size_45_px" />
             </com.zhy.autolayout.AutoRelativeLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="90px"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
             <com.zhy.autolayout.AutoLinearLayout
                 android:layout_width="0dp"
-                android:orientation="vertical"
-                android:gravity="center"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical" />
+
             <com.zhy.autolayout.AutoLinearLayout
                 android:layout_width="0dp"
-                android:orientation="vertical"
-                android:gravity="center"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical" />
 
         </com.zhy.autolayout.AutoLinearLayout>
     </com.zhy.autolayout.AutoLinearLayout>

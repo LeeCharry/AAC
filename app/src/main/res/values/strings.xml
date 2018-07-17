@@ -1,35 +1,12 @@
 <resources>
     <string name="app_name">AAC</string>
     <!-- 二维码扫描 begin-->
-    <string name="encode_qrcode">生成二维码</string>
-    <string name="dencode_qrcode">扫描二维码</string>
-    <string name="code_text">请输入生成二维码的文本信息</string>
-    <string name="qrcodetext">这里显示扫描结果</string>
     <string name="title_activity_main2">AAC</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <string name="action_settings">Settings</string>
-    <string name="simple_complex_switch">简 / 繁</string>
-    <string name="title_home">ACC</string>
+    <string name="simple_complex_switch">简/繁</string>
     <string name="please_input_waybill_no">请输入运单编号</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
     <string name="reward">收货</string>
     <string name="shipping">出货</string>
     <string name="arrival_station">抵达站所</string>
@@ -38,11 +15,11 @@
     <string name="logout">登出</string>
     <string name="inquiry">查询</string>
     <string name="no_inquiry_history">无查件历史信息、点击搜索框快捷查件</string>
+    <string name="inquiry_history">查询历史</string>
 
     <string name="domestic_transfer">国内转运</string>
     <string name="select_guonei_kuaidi">选择国内快递</string>
     <string name="confirm">确定</string>
-    <string name="yiqianshou">已签收</string>
     <string name="login">登录</string>
     <string name="please_input_name_or_phoneNo">请输入姓名/手机号码</string>
     <string name="please_input_pwd">请输入密码</string>
@@ -59,19 +36,43 @@
     <string name="feed_back_content">反馈内容</string>
     <string name="please_input_feed_back_content">请输入反馈内容</string>
     <string name="submit">提交</string>
-    <string name="question_and_answer"><![CDATA[Q & A]]></string>
-    <string name="app_instructions">APP 操作说明</string>
-    <string name="consignment_notes">托运须知</string>
     <string name="search_result">搜索结果</string>
     <string name="express_choice">快递选择</string>
     <string name="scan_prompt_content">请将条形码放入扫描框内即可自动扫描</string>
     <string name="staffer_login">员工登录</string>
-    <string name="waybill_no">运单编号：12345678900987</string>
-    <string name="title_activity_test02">Test02Activity</string>
+    <string name="waybill_no3">运单编号: </string>
     <string name="username_must_not_empty">用户名不能为空</string>
     <string name="pwd_must_not_empty">密码不能为空</string>
     <string name="signing">签收</string>
     <string name="are_you_sure_to_logout">确定要退出吗？</string>
     <string name="cancel">取消</string>
+    <string name="is_sure_to_reward">确认收货?</string>
+    <string name="is_sure_to_send">确认出货?</string>
+    <string name="reward_success">收货成功</string>
+    <string name="send_success">出货成功</string>
+    <string name="salesman_has_received_the_shipment">业务员已收取货件</string>
+    <string name="shipment_loaded_and_sent_to_destination">货件已装车，发往目的地</string>
+    <string name="shipments_arrive_at_Station">货件到达站点</string>
+    <string name="is_sure_to_arriveplace">确认抵达站点？</string>
+    <string name="whether_to_confirm_the_transfer">确认转</string>
+    <string name="Waybill_number_cannot_be_empty">运单号不能为空</string>
+    <string name="Please_choose_domestic_express">请选择国内快递</string>
+    <string name="today">今天</string>
+    <string name="has_reward">已收货</string>
+    <string name="has_sending">已出货</string>
+    <string name="has_transfer">转运中</string>
+    <string name="has_arriveplace">抵达站点</string>
+    <string name="has_delivery">派送中</string>
+    <string name="has_sign">已签收</string>
+    <string name="is_sure_to_delivery">确认派送</string>
+    <string name="is_sure_to_sign">确认签收？</string>
+    <string name="name_is_not_empty">姓名不能为空</string>
+    <string name="phone_is_not_empty">手机号不能为空</string>
+    <string name="content_is_not_empty">内容不能为空</string>
+    <string name="phone_is_uncorrent">手机号格式有误</string>
+    <string name="please_login_first">请先登录</string>
+    <string name="shibie_failed">图片识别失败</string>
+    <string name="network_is_unavaliable">网络未连接</string>
+    <string name="permission_request_failed">权限申请失败</string>
     <!-- 二维码扫描 end-->
 </resources>

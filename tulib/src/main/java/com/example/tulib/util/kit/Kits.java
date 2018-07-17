@@ -102,8 +102,8 @@ public class Kits {
                 return false;
             }
 
-            Intent i = new Intent(Intent.ACTION_DELETE, Uri.parse(new StringBuilder().append("package:")
-                    .append(packageName).toString()));
+            Intent i = new Intent(Intent.ACTION_DELETE, Uri.parse("package:" +
+                    packageName));
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(i);
             return true;
@@ -709,7 +709,7 @@ public class Kits {
             }
 
             java.io.File folder = new java.io.File(folderName);
-            return (folder.exists() && folder.isDirectory()) ? true : folder.mkdirs();
+            return (folder.exists() && folder.isDirectory()) || folder.mkdirs();
         }
 
         /**

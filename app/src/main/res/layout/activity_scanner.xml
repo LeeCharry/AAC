@@ -24,7 +24,7 @@
                             app:result_color="@color/result_view"
             app:result_point_color="@color/result_point_color"
         -->
-        <com.shyohan.aac.google.zxing.view.ViewfinderView
+        <com.shyouhan.aac.google.zxing.view.ViewfinderView
             app:label_text="@string/scan_prompt_content"
             android:id="@+id/viewfinder_content"
             android:layout_width="wrap_content"

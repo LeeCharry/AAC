@@ -4,37 +4,40 @@ android {
     compileSdkVersion 27
     buildToolsVersion "27.0.2"
     defaultConfig {
-        applicationId "com.shyohan.aac"
+        applicationId "com.shyouhan.aac"
         minSdkVersion 17
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        vectorDrawables.useSupportLibrary = true
+
+        //只保留中文简体和中文繁体
+        resConfigs "zh","zh-rTW"
+    }
+    signingConfigs {
+        release {
+            storeFile file("E:/aac_keystore/licy.jks")
+            storePassword "123456"
+            keyAlias "lcy"
+            keyPassword "123456"
+        }
     }
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
+        }
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            shrinkResources true  // 移除无用的resource文件
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:27.+'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
-    implementation 'com.android.support:support-vector-drawable:27.1.1'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.android.support:design:27.+'
     implementation project(':tulib')
     implementation 'com.android.support:recyclerview-v7:27.+'
-    implementation 'com.android.support:cardview-v7:27.+'
-//    compile 'com.flyco.dialog:FlycoDialog_Lib:1.3.2@aar'
-//    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
-//    compile 'com.hyman:flowlayout-lib:1.1.2'
-
     //ZXing
     compile 'com.google.zxing:core:3.3.0'
 }

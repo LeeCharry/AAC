@@ -2,70 +2,86 @@
 <com.zhy.autolayout.AutoLinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
-<android.support.design.widget.CoordinatorLayout
-
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    tools:context="com.shyohan.aac.activity.MainActivity">
-
-    <android.support.design.widget.AppBarLayout
+    <com.youth.banner.Banner
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        app:elevation="0dp"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        android:layout_height="@dimen/banner_width_650_px"
+        android:background="@color/white"
+        android:scrollIndicators="right"
+        app:title_background="#77ffffff"
+        app:indicator_drawable_selected="@mipmap/ic_dot_white"
+        app:indicator_drawable_unselected="@mipmap/ic_dot_gray"
+        app:title_textcolor="@color/white"
+        app:indicator_height="22px"
+        app:indicator_width="22px"
+        android:fitsSystemWindows="true"
+        app:title_textsize="@dimen/home_left_text_size_45_px"
+        android:id="@+id/banner">
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:padding="0dp"
-            app:contentInsetStart="0dp"
-            app:contentInsetStartWithNavigation="0dp"
-            android:clipToPadding="true"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
-
-            <com.zhy.autolayout.AutoLinearLayout
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            app:elevation="0dp"
+            android:layout_marginTop="20px"
+            >
+            <!--   android:theme="@style/AppTheme.AppBarOverlay" -->
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorPrimary"
-                android:paddingLeft="17px"
-                android:paddingRight="@dimen/padding_left_right_37_px">
+                android:padding="0dp"
+                app:contentInsetStart="0dp"
+                app:contentInsetStartWithNavigation="0dp"
+                android:clipToPadding="true"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
 
-                <ImageView
-                    android:id="@+id/iv_login"
-                    android:layout_width="wrap_content"
-                    android:paddingRight="30px"
-                    android:paddingLeft="20px"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="left|center_vertical"
-                    android:src="@mipmap/ic_login_person" />
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:paddingLeft="17px"
+                    android:paddingRight="@dimen/padding_left_right_37_px">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/title_home"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/title_size_56_px"/>
+                    <ImageView
+                        android:id="@+id/iv_login"
+                        android:layout_width="wrap_content"
+                        android:paddingRight="30px"
+                        android:background="@drawable/btn_selector"
+                        android:paddingLeft="20px"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left|center_vertical"
+                        android:src="@mipmap/ic_login_person" />
 
-                <ImageView
-                    android:id="@+id/iv_switch_language"
-                    android:layout_width="124px"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
-                    android:src="@mipmap/ic_language_switch" />
-            </com.zhy.autolayout.AutoLinearLayout>
-        </android.support.v7.widget.Toolbar>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/app_name"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/title_size_56_px"/>
 
-    </android.support.design.widget.AppBarLayout>
-
+                    <ImageView
+                        android:layout_width="124px"
+                        android:visibility="gone"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:src="@mipmap/ic_language_switch" />
+                    <TextView
+                        android:background="@drawable/btn_selector"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:id="@+id/tv_switch_language"
+                        android:text="@string/simple_complex_switch"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/home_left_text_size_45_px"/>
+                </com.zhy.autolayout.AutoLinearLayout>
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
+    </com.youth.banner.Banner>
     <include layout="@layout/content_main" />
-</android.support.design.widget.CoordinatorLayout>
+<!--</android.support.design.widget.CoordinatorLayout>-->
 </com.zhy.autolayout.AutoLinearLayout>

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.shyohan.aac.activity.ShipmentInquiryActivity">
+    tools:context="com.shyouhan.aac.activity.ShipmentInquiryActivity">
     <include layout="@layout/layout_title"/>
     <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"
@@ -25,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="运单号：1234567890987321"
+                android:text=""
                 android:id="@+id/tv_waybill_no"
                 android:gravity="center_vertical"
                 android:textColor="#3E3A39"
@@ -36,9 +35,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="2018/6/25   12:28   货件到达上海转运中"
+                android:text=""
                 android:id="@+id/tv_date_addr"
                 android:gravity="center_vertical"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:textColor="#898989"
                 android:textSize="@dimen/home_left_text_size_45_px"
                 />
@@ -56,29 +57,43 @@
                 android:paddingLeft="84px"
                 android:paddingRight="93px"
                 android:gravity="center_vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/select_guonei_kuaidi"
-                    android:gravity="center_vertical"
-                    android:textColor="#3E3A39"
-                    android:id="@+id/tv_select"
-                    android:layout_marginTop="46px"
-                    android:textSize="@dimen/title_size_50_px"/>
-                <ImageView
-                    android:layout_marginTop="38px"
-                    android:paddingLeft="45px"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignBottom="@+id/tv_select"
-                    android:src="@mipmap/ic_select"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/iv_select"
-                    />
+                <com.zhy.autolayout.AutoRelativeLayout
+                    android:id="@+id/rl_select"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/select_guonei_kuaidi"
+                        android:gravity="center_vertical"
+                        android:textColor="#3E3A39"
+                        android:id="@+id/tv_select"
+                        android:layout_marginTop="46px"
+                        android:textSize="@dimen/title_size_50_px"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:id="@+id/tv_express_name"
+                        android:textColor="#3E3A39"
+                        android:layout_toLeftOf="@+id/iv_select"
+                        android:layout_marginTop="46px"
+                        android:textSize="@dimen/title_size_50_px"/>
+                    <ImageView
+                        android:layout_marginTop="38px"
+                        android:paddingLeft="65px"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignBottom="@+id/tv_select"
+                        android:src="@mipmap/ic_select"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/iv_select"
+                        />
+                </com.zhy.autolayout.AutoRelativeLayout>
                 <com.zhy.autolayout.AutoLinearLayout
-                    android:layout_alignLeft="@+id/tv_select"
+                    android:layout_alignLeft="@+id/rl_select"
                     android:layout_alignRight="@+id/iv_select"
-                    android:layout_below="@+id/tv_select"
+                    android:layout_below="@+id/rl_select"
                     android:layout_width="match_parent"
                     android:background="@mipmap/ic_bg_search"
                     android:id="@+id/ll_search_box"
@@ -87,14 +102,16 @@
                     <EditText
                         android:background="@null"
                         android:id="@+id/et_waybill_no"
+                        android:singleLine="true"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:layout_marginLeft="48px"
                         android:hint="@string/please_input_waybill_no"
-                        android:textSize="20sp"
+                        android:textSize="50px"
                         android:gravity="center_vertical|start"/>
                     <ImageView
+                        android:background="@drawable/btn_selector"
                         android:id="@+id/iv_scan"
                         android:layout_width="70px"
                         android:layout_height="match_parent"
@@ -105,6 +122,7 @@
 
             </com.zhy.autolayout.AutoRelativeLayout>
             <Button
+                android:background="@drawable/bt_bg_selector"
                 android:layout_width="match_parent"
                 android:layout_height="127px"
                 android:text="@string/confirm"
@@ -115,7 +133,7 @@
                 android:layout_marginLeft="151px"
                 android:layout_marginRight="151px"
                 android:textColor="@color/white"
-                android:background="@color/colorPrimary"/>
+                />
         </com.zhy.autolayout.AutoLinearLayout>
     </com.zhy.autolayout.AutoLinearLayout>
 

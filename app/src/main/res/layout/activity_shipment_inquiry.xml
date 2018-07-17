@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.shyohan.aac.activity.ShipmentInquiryActivity">
+    android:focusableInTouchMode="true"
+    android:focusable="true"
+    android:background="@color/white"
+    android:descendantFocusability="beforeDescendants"
+    tools:context="com.shyouhan.aac.activity.ShipmentInquiryActivity">
     <include layout="@layout/layout_title"/>
     <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"
@@ -15,19 +18,20 @@
         android:id="@+id/ll_search_box"
         android:layout_marginTop="125px"
         android:layout_height="127px">
-
         <EditText
             android:background="@null"
             android:id="@+id/et_waybill_no"
+            android:singleLine="true"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_marginLeft="48px"
             android:hint="@string/please_input_waybill_no"
-            android:textSize="20sp"
+            android:textSize="50px"
             android:gravity="center_vertical|start"/>
 
         <ImageView
+            android:background="@drawable/btn_selector"
             android:id="@+id/iv_scan"
             android:layout_width="70px"
             android:layout_height="match_parent"
@@ -35,28 +39,30 @@
             android:layout_marginRight="40px"
             android:src="@mipmap/ic_scan" />
     </com.zhy.autolayout.AutoLinearLayout>
+
     <Button
+        android:background="@drawable/bt_bg_selector"
+        android:id="@+id/btn_inquiry"
         android:layout_width="match_parent"
         android:layout_height="127px"
-        android:text="@string/inquiry"
-        android:textSize="40px"
-        android:id="@+id/btn_inquiry"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="86px"
         android:layout_marginLeft="151px"
         android:layout_marginRight="151px"
+        android:layout_marginTop="100px"
+        android:text="@string/inquiry"
         android:textColor="@color/white"
-        android:background="@color/colorPrimary"/>
+        android:textSize="40px" />
     <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="60px"
+            android:id="@+id/rv_history"
+            android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="48px"
-            android:hint="@string/no_inquiry_history"
-            android:textSize="@dimen/home_left_text_size_45_px"
-            android:gravity="center"/>
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
 
     </com.zhy.autolayout.AutoLinearLayout>
 </com.zhy.autolayout.AutoLinearLayout>

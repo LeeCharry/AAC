@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.shyohan.aac.activity.DeliveryActivity">
+    tools:context="com.shyouhan.aac.activity.DoSuccessActivity">
     <include layout="@layout/layout_title" />
     <TextView
         android:layout_width="match_parent"
@@ -14,12 +13,15 @@
         android:textSize="55px"
         android:id="@+id/tv_waybill_no"
         android:textColor="@color/textcolor_3e3a39"
-        android:text="运单号：12345678900987"
+        android:text=""
+        android:background="@color/white"
         android:gravity="center_vertical"/>
     <android.support.v7.widget.RecyclerView
+        android:paddingTop="50px"
+        android:paddingBottom="20px"
         android:layout_marginTop="28px"
         android:id="@+id/rv"
         android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"/>
 </com.zhy.autolayout.AutoLinearLayout>

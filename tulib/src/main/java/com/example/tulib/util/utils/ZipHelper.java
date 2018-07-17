@@ -69,7 +69,7 @@ public class ZipHelper {
         int bufferSizeInBytes = numberOfBytesToDecompress;
 
         int numberOfBytesDecompressedSoFar = 0;
-        List<Byte> bytesDecompressedSoFar = new ArrayList<Byte>();
+        List<Byte> bytesDecompressedSoFar = new ArrayList<>();
 
         try {
             while (inflater.needsInput() == false) {
@@ -89,7 +89,7 @@ public class ZipHelper {
 
             returnValues = new byte[bytesDecompressedSoFar.size()];
             for (int b = 0; b < returnValues.length; b++) {
-                returnValues[b] = (byte) (bytesDecompressedSoFar.get(b));
+                returnValues[b] = bytesDecompressedSoFar.get(b);
             }
 
         } catch (DataFormatException dfe) {

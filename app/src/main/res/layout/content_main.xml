@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.shyohan.aac.activity.MainActivity"
+    tools:context="com.shyouhan.aac.activity.MainActivity"
     android:orientation="vertical"
     android:background="@color/white"
     tools:showIn="@layout/app_bar_main">
     <com.youth.banner.Banner
+        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/banner_width_507_px"
+        android:layout_height="@dimen/banner_width_650_px"
         android:background="@color/white"
         android:scrollIndicators="right"
         app:title_background="#77ffffff"
@@ -49,6 +50,7 @@
             android:textSize="20sp" />
 
         <ImageView
+            android:background="@drawable/btn_selector"
             android:id="@+id/iv_scan"
             android:layout_width="70px"
             android:layout_height="match_parent"
@@ -134,6 +136,7 @@
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:layout_height="0dp"
+            android:background="@drawable/btn_selector"
             android:layout_marginTop="70px"
             android:layout_weight="1">
             <com.zhy.autolayout.AutoLinearLayout

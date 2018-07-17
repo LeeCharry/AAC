@@ -29,7 +29,6 @@ public class RxErrorHandler {
         private Context context;
         private ResponseErroListener responseErroListener;
         private ErrorHandlerFactory errorHandlerFactory;
-
         private Builder() {
         }
 
