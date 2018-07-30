@@ -63,6 +63,11 @@ public class SiteInquiryActivity extends BaseActivity implements GetPlaceContrac
                     public void onConfirm() {
                         requestCallPermission();
                     }
+
+                    @Override
+                    public void onSelect(View view) {
+
+                    }
                 });
             }
         });

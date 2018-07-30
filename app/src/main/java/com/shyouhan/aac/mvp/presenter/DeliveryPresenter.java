@@ -1,9 +1,11 @@
 package com.shyouhan.aac.mvp.presenter;
 
 import android.content.Context;
+import android.content.Intent;
 
 import com.example.tulib.util.base.BasePresenter;
 import com.shyouhan.aac.R;
+import com.shyouhan.aac.activity.LoginActivity;
 import com.shyouhan.aac.bean.BaseObject;
 import com.shyouhan.aac.bean.RequestParam;
 import com.shyouhan.aac.constant.AppConstant;
@@ -58,7 +60,9 @@ public class DeliveryPresenter extends BasePresenter<DeliveryContract.Model,Deli
                             }else{
                                 mRootview.onDeliveryFailed(baseObject.getMsg());
                             }
-
+                            if (baseObject.getStatus() == 401){
+                                mRootview.launchActivity(new Intent(context, LoginActivity.class));
+                            }
                         }
                     }
                 });

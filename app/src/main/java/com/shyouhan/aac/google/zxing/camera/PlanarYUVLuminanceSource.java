@@ -62,6 +62,7 @@ public final class PlanarYUVLuminanceSource extends LuminanceSource {
       row = new byte[width];
     }
     int offset = (y + top) * dataWidth + left;
+//    int offset = (y + top) * dataHeight + left;
     System.arraycopy(yuvData, offset, row, 0, width);
     return row;
   }

@@ -57,6 +57,7 @@ import com.zhy.autolayout.AutoRelativeLayout;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -116,6 +117,10 @@ public class MainActivity extends BaseActivity
     private boolean fromlogin = false;
     private final static int REQUEST_PERMISSION_CODE_CAMERA = 102;
     private int scanCode;
+    private boolean isDuo = false;  //是否是多件
+//    HashMap<String, List<String>> multiplePieces;  //一个多件对应多个假件
+    List<String>  fakePackIds;
+    private String realPackNum = "";
 
     @Override
     protected void initView() {
@@ -125,6 +130,7 @@ public class MainActivity extends BaseActivity
         findId();
         setListener();
         initPresenter();
+
         onBack();
     }
 
@@ -377,7 +383,28 @@ public class MainActivity extends BaseActivity
             case R.id.ll_arrival_station:  //到达站点
                 if (hasLogin()) {
                     if (requestForCamera(ProcessType.REQUEST_CODE_ARRIVEPLACE)) {
-                        intent2CaptureActivity(ProcessType.REQUEST_CODE_ARRIVEPLACE);
+                        startActivity(new Intent(mContext,ArriveStationActivity.class));
+                        //选择单多件
+//                        showCheckDialog(mContext, new CallBack() {
+//                            @Override
+//                            public void onConfirm() {
+//                            }
+//
+//                            @Override
+//                            public void onSelect(View view) {
+//                                switch (view.getId()) {
+//                                    case R.id.rb_dan:
+//                                        intent2CaptureActivity(ProcessType.REQUEST_CODE_ARRIVEPLACE);
+//                                        break;
+//                                    case R.id.rb_duo:
+//                                        isDuo = true;
+////                                        multiplePieces = new HashMap<>();
+//                                        fakePackIds = new ArrayList<>();
+//                                        intent2CaptureActivity(ProcessType.REQUEST_CODE_ARRIVEPLACE);
+//                                        break;
+//                                }
+//                            }
+//                        });
                     }
                 }
                 break;
@@ -426,7 +453,7 @@ public class MainActivity extends BaseActivity
                     checkMyPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 return true;
             } else {
-                requestPermissions(new String[]{Manifest.permission.CAMERA,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION_CODE_CAMERA);
+                requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION_CODE_CAMERA);
                 return false;
             }
         }
@@ -446,15 +473,16 @@ public class MainActivity extends BaseActivity
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_PERMISSION_CODE_CAMERA) {
             for (int i = 0; i < grantResults.length; i++) {
-                if (grantResults[i] != PackageManager.PERMISSION_GRANTED){
+                if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
                     ToastUtils.showShort(R.string.permission_request_failed);
                     return;
                 }
             }
             intent2CaptureActivity(scanCode);
-        } if (requestCode == REQUEST_PERMISSION_CODE_CAMERA) {
+        }
+        if (requestCode == REQUEST_PERMISSION_CODE_CAMERA) {
             for (int i = 0; i < grantResults.length; i++) {
-                if (grantResults[i] != PackageManager.PERMISSION_GRANTED){
+                if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
                     ToastUtils.showShort(R.string.permission_request_failed);
                     return;
                 }
@@ -475,7 +503,7 @@ public class MainActivity extends BaseActivity
             intent.putExtra(AppConstant.PROCESS_TYPE, ProcessType.REQUEST_CODE_TRANSFER);
             startActivity(intent);
         } else {
-            startActivityForResult(intent, code);
+            startActivityForResult(intent,code);
         }
     }
 
@@ -581,9 +609,23 @@ public class MainActivity extends BaseActivity
                 case ProcessType.REQUEST_CODE_SENDING:      //出货
                     showDialog(ProcessType.REQUEST_CODE_SENDING, result);
                     break;
-                case ProcessType.REQUEST_CODE_ARRIVEPLACE:      //抵达站所
-                    showDialog(ProcessType.REQUEST_CODE_ARRIVEPLACE, result);
-                    break;
+//                case ProcessType.REQUEST_CODE_ARRIVEPLACE:      //抵达站所
+//                    if (isDuo) {
+//                        isDuo = false;
+//                        realPackNum = result; //真单号
+//                        showDialogDuo();
+//                    } else {
+//                        showDialog(ProcessType.REQUEST_CODE_ARRIVEPLACE, result);
+//                    }
+//                    break;
+//                case ProcessType.REQUEST_CODE_FAKE_PACK:      //扫描假件返回
+//                    if (!fakePackIds.contains(result)){
+//                        fakePackIds.add(result);
+//                    }else{
+//                        ToastUtils.showShort(R.string.please_do_not_scan_again);
+//                    }
+//                    showDialogDuo();
+//                    break;
                 case ProcessType.REQUEST_CODE_DELIVERY:      //派送
                     showDialog(ProcessType.REQUEST_CODE_DELIVERY, result);
                     break;
@@ -641,15 +683,72 @@ public class MainActivity extends BaseActivity
                 } else if (requestCode == ProcessType.REQUEST_CODE_SENDING) {
                     sendingPresenter.sending(result);
                 } else if (requestCode == ProcessType.REQUEST_CODE_ARRIVEPLACE) {
-                    arrivePlacePresenter.arrivePlace(result);
+                    arrivePlacePresenter.arrivePlace(result,"");
                 } else if (requestCode == ProcessType.REQUEST_CODE_DELIVERY) {
                     deliveryPresenter.delivery(result);
                 } else if (requestCode == ProcessType.REQUEST_CODE_SIGNING) {
                     signPresenter.sign(String.valueOf(result));
                 }
             }
+
+            @Override
+            public void onSelect(View view) {
+
+            }
         });
     }
+
+//    private void showDialogDuo() {
+//        String string1 = "";
+//        String string2 = "";
+//        string1 = getString(R.string.waybill_no3) + " ";
+//        string2 = getString(R.string.is_sure_to_arriveplace);
+//        String fakeIdStr = getFakeIdStr(fakePackIds);
+//        String msg = "";
+//        if (null != fakeIdStr && fakePackIds.size() > 0){
+//           msg =  string1 + realPackNum + "\r\n" +"("+fakeIdStr+")"+"\r\n"+ string2;
+//        }else{
+//            msg =  string1 + realPackNum + "\r\n" + string2;
+//        }
+//        showDialogDuo(MainActivity.this,msg , new CallBack() {
+//            @Override
+//            public void onConfirm() {
+//            }
+//            @Override
+//            public void onSelect(View view) {
+//                switch (view.getId()) {
+//                    case R.id.tv_queren:
+//                        arrivePlacePresenter.arrivePlace(realPackNum,getFakeIdStr(fakePackIds));
+//                        break;
+//                    case R.id.tv_queren_continue:
+//                        intent2CaptureActivity(ProcessType.REQUEST_CODE_FAKE_PACK);
+//                        break;
+//                    case R.id.tv_cancel:
+//                       //取消
+//                        realPackNum = "";
+//                        if (null != fakePackIds) {
+//                            fakePackIds.clear();
+//                        }
+//                        break;
+//                }
+//            }
+//        });
+//    }
+
+    /**
+     * list转化为 字符串
+//     */
+//    private String getFakeIdStr(List<String> fakePackIds) {
+//        if (fakePackIds != null && fakePackIds.size()>0) {
+//            String fakeIds = "";
+//            for (String fakeId: fakePackIds) {
+//                fakeIds = fakeIds.concat(fakeId+",");
+//            }
+//            return fakeIds.substring(0,fakeIds.length()-1);
+//        }else{
+//            return "";
+//        }
+//    }
 
     @Override
     protected void onDestroy() {
@@ -678,7 +777,7 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void launchActivity(Intent intent) {
-
+        startActivity(intent);
     }
 
     @Override
@@ -728,6 +827,10 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onArrivePlaceSuccess(BaseObject baseObject) {
+        realPackNum = "";
+        if (null != fakePackIds) {
+            fakePackIds.clear();
+        }
         Intent intent = new Intent(MainActivity.this, DoSuccessActivity.class);
         intent.putExtra(AppConstant.PROCESS_TIME, baseObject.getTime());
         intent.putExtra(AppConstant.PROCESS_TYPE, ProcessType.REQUEST_CODE_ARRIVEPLACE);
@@ -737,6 +840,10 @@ public class MainActivity extends BaseActivity
     @Override
     public void onArrivePlaceFailed(String error) {
         showMessage(error);
+        realPackNum = "";
+        if (null != fakePackIds) {
+            fakePackIds.clear();
+        }
     }
 
     @Override

@@ -22,6 +22,7 @@ public class AppConstant {
     public static final String SENDING = "sending";
     public static final String TRANSFER = "transfer";
     public static final String ARRIVEPLACE = "arriveplace";
+    public static final String JIADAN = "jiadan";
     public static final String DELIVERY = "delivery";
     public static final String SIGN = "sign";
     public static final String WEB_URL = "WEB_URL";
@@ -35,5 +36,6 @@ public class AppConstant {
     public static final String TABLE_SEARCH_HISTORY = "table_search_history";
     public static final String COLUMN_PICKID = "column_pickid";
     public static final String AVATAR = "avatar";
+    public static final String FAKEIDSTR = "fakeIdStr";
 }
 

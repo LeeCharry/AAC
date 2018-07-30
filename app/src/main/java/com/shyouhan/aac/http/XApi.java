@@ -13,6 +13,7 @@ import okhttp3.Cache;
 import okhttp3.CookieJar;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -113,9 +114,9 @@ public class XApi {
             }
 
             if (provider.configLogEnable()) {
-//                HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor();
-//                logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-//                builder.addInterceptor(logInterceptor);
+                HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor();
+                logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+                builder.addInterceptor(logInterceptor);
             }
 
             client = builder.build();

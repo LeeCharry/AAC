@@ -26,6 +26,7 @@ public class RequestParam implements Serializable {
      */
     private String token;
     private String packid;
+    private String fakepackid;
     private Integer express;
     private String expressnum;
 
@@ -41,8 +42,16 @@ public class RequestParam implements Serializable {
      * content : OdMjQBPZSH
      */
 
-    private String phone;
+    private String email;
     private String content;
+
+    public String getFakepackid() {
+        return fakepackid;
+    }
+
+    public void setFakepackid(String fakepackid) {
+        this.fakepackid = fakepackid;
+    }
 
     /**
      * packid : 62140
@@ -60,11 +69,18 @@ public class RequestParam implements Serializable {
         this.device = device;
     }
 
-    public RequestParam(String username, String token, String phone, String content) {
+    public RequestParam(String username, String token, String email, String content) {
         this.username = username;
 //        this.token = token;
-        this.phone = phone;
+        this.email = email;
         this.content = content;
+    }
+    //多件抵达站点
+    public RequestParam(String token, String packid, String fakepackid, Integer express) {
+        this.token = token;
+        this.packid = packid;
+        this.fakepackid = fakepackid;
+//        this.express = express;
     }
 
     public RequestParam(String token, String packid) {
@@ -148,12 +164,12 @@ public class RequestParam implements Serializable {
         this.expressnum = expressnum;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getContent() {

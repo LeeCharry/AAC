@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginLeft="30px"
+    android:layout_marginRight="30px"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/sl_logout_sp">
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="63px"
+            android:gravity="center_vertical"
+            android:paddingTop="30px"
+            android:paddingBottom="30px"
+            android:paddingLeft="90px"
+            android:button="@null"
+            android:background="@drawable/dan_duojian_selector"
+            android:textColor="#3E3A39"
+            android:text="@string/danjian"
+            android:id="@+id/rb_dan"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#B6B5B5"/>
+        <RadioButton
+            android:background="@drawable/dan_duojian_selector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="63px"
+            android:gravity="center_vertical"
+            android:paddingTop="30px"
+            android:paddingBottom="30px"
+            android:paddingLeft="90px"
+            android:button="@null"
+            android:textColor="#3E3A39"
+            android:text="@string/duojian"
+            android:id="@+id/rb_duo"/>
+    </RadioGroup>
+</LinearLayout>

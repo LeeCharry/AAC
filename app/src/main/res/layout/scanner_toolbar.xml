@@ -9,19 +9,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <ImageView
-            android:id="@+id/scanner_toolbar_back"
-            android:layout_width="wrap_content"
-            android:paddingLeft="20px"
-            android:layout_height="match_parent"
-           android:paddingRight="40px"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/ic_back_white"/>
+        android:id="@+id/scanner_toolbar_back"
+        android:layout_width="wrap_content"
+        android:paddingLeft="20px"
+        android:layout_height="match_parent"
+        android:paddingRight="40px"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/ic_back_white"/>
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="二维码/条码"
+            android:gravity="center"
+            android:id="@+id/tv_scan_title"
+            android:layout_centerInParent="true"
+            android:text="@string/scan_title"
             android:textColor="#fff"
             android:textSize="16sp"/>
         <ImageView

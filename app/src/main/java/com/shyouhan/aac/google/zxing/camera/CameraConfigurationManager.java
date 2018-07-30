@@ -24,6 +24,8 @@ import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.regex.Pattern;
 
 final class CameraConfigurationManager {
@@ -71,6 +73,7 @@ final class CameraConfigurationManager {
     cameraResolution = getCameraResolution(parameters, screenResolutionForCamera);
     Log.d(TAG, "Camera resolution: " + screenResolution);
 
+
   }
 
   /**
@@ -88,7 +91,29 @@ final class CameraConfigurationManager {
     //setSharpness(parameters);
     //modify here
     camera.setDisplayOrientation(90);
+
+    //2018-07-20(lcy)
+//    setDisplayOrientation(camera,90);
     camera.setParameters(parameters);
+  }
+
+  /*改变照相机成像的方向的方法*/
+  protected void setDisplayOrientation(Camera camera, int angle) {
+    Method downPolymorphic = null;
+    try {
+      downPolymorphic = camera.getClass().getMethod("setDisplayOrientation", new Class[] { int.class });
+      if (downPolymorphic != null)
+        downPolymorphic.invoke(camera, new Object[]{angle});
+    } catch (NoSuchMethodException e) {
+      e.printStackTrace();
+    } catch (IllegalArgumentException e) {
+      e.printStackTrace();
+    } catch (IllegalAccessException e) {
+      e.printStackTrace();
+    } catch (InvocationTargetException e) {
+      e.printStackTrace();
+    }
+
   }
 
   Point getCameraResolution() {

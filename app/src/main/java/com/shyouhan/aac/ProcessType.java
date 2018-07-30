@@ -12,5 +12,8 @@ public class ProcessType {
     public static final int  REQUEST_CODE_SIGNING = 1004;
     public static final int  REQUEST_CODE_DELIVERY = 1005;
     public static final int REQUEST_CODE_SEARCH = 1006;
+    public static final int REQUEST_CODE_FAKE_PACK = 1007;  //假件
+    public static final int REQUEST_CODE_ARRIVEPLACE_DAN = 1008;  //单件
+    public static final int REQUEST_CODE_ARRIVEPLACE_DUO = 1009;  //多件
 }
 

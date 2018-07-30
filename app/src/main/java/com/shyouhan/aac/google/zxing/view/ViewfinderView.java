@@ -189,7 +189,8 @@ public final class ViewfinderView extends View {
       textPaint.setTextSize(50.0F);
       textPaint.setAntiAlias(true);
       StaticLayout layout = new StaticLayout(labelText, textPaint, 543,Layout.Alignment.ALIGN_CENTER, 1.0F, 0.0F, true);
-      canvas.translate(frame.left +173, frame.top + frame.height() +100);
+//      canvas.translate(frame.left +173, frame.top + frame.height() +100);
+      canvas.translate(frame.left +(frame.width()-543)/2, frame.top + frame.height() +100);
       layout.draw(canvas);
       canvas.save();
       canvas.restore();
@@ -216,8 +217,8 @@ public final class ViewfinderView extends View {
   //绘制扫描线
   private void drawLaserScanner(Canvas canvas, Rect frame) {
     //再一次还原canvas
-
-    canvas.translate(-(frame.left+173),-(frame.top + frame.height() +100));
+    //543为文字长度
+    canvas.translate(-(frame.left +(frame.width()-543)/2),-(frame.top + frame.height() +100));
     paint.setColor(laserColor);
     //扫描线闪烁效果
 //    paint.setAlpha(SCANNER_ALPHA[scannerAlpha]);

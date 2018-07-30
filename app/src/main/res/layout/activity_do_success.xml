@@ -28,17 +28,19 @@
                 android:layout_marginTop="75px"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/tv_date"
+                android:text="1222222222222222"
                 android:gravity="center_vertical"
                 android:textColor="@color/textcolor_3e3a39"
                 android:textSize="@dimen/home_left_text_size_45_px"
                 />
             <TextView
+                android:text="sssssssssssssssssssssssssssssss"
                 android:layout_marginTop="33px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/tv_is_sign"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 android:textColor="@color/textcolor_3e3a39"
                 android:textSize="@dimen/home_left_text_size_45_px"
                 />

@@ -118,6 +118,11 @@ public class DomesticTransferActivity extends BaseActivity implements View.OnCli
                         public void onConfirm() {
                             transferPresenter.transfer(pickId,selectExpressBean.getId(),expressNo);
                         }
+
+                        @Override
+                        public void onSelect(View view) {
+
+                        }
                     });
                 }
                 break;
@@ -209,7 +214,7 @@ public class DomesticTransferActivity extends BaseActivity implements View.OnCli
 
     @Override
     public void launchActivity(Intent intent) {
-
+        startActivity(intent);
     }
 
     @Override

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.shyouhan.aac.activity.DoSuccessActivity">
+    <include layout="@layout/layout_title"/>
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:id="@+id/ll_danjian"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_marginTop="50px"
+
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@+id/tv_select"
+            android:src="@mipmap/ic_danjian"
+            android:layout_width="180px"
+            android:layout_height="180px"
+            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="75px"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/please_scan_danjian"
+                android:gravity="center_vertical"
+                android:textColor="@color/textcolor_3e3a39"
+                android:textSize="@dimen/home_left_text_size_45_px"
+                />
+        </com.zhy.autolayout.AutoLinearLayout>
+    <View
+     android:layout_width="match_parent"
+        android:layout_height="3px"
+        android:layout_marginTop="60px"
+        android:background="@color/title_bg_ltgray"/>
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:id="@+id/ll_duojian"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_marginTop="50px"
+
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@+id/tv_select"
+            android:src="@mipmap/ic_duojian"
+            android:layout_width="180px"
+            android:layout_height="180px"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="75px"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/please_scan_duojian"
+            android:gravity="center_vertical"
+            android:textColor="@color/textcolor_3e3a39"
+            android:textSize="@dimen/home_left_text_size_45_px"
+            />
+    </com.zhy.autolayout.AutoLinearLayout>
+</com.zhy.autolayout.AutoLinearLayout>

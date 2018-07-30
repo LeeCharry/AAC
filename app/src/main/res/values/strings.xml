@@ -31,8 +31,8 @@
     <string name="feed_back">意见反馈</string>
     <string name="please_input_name">请输入姓名</string>
     <string name="name">姓名</string>
-    <string name="phone_no">电话</string>
-    <string name="please_input_phone_no">请输入电话号码</string>
+    <string name="phone_no">邮箱</string>
+    <string name="please_input_phone_no">请输入邮箱地址</string>
     <string name="feed_back_content">反馈内容</string>
     <string name="please_input_feed_back_content">请输入反馈内容</string>
     <string name="submit">提交</string>
@@ -67,12 +67,23 @@
     <string name="is_sure_to_delivery">确认派送</string>
     <string name="is_sure_to_sign">确认签收？</string>
     <string name="name_is_not_empty">姓名不能为空</string>
-    <string name="phone_is_not_empty">手机号不能为空</string>
+    <string name="phone_is_not_empty">邮箱不能为空</string>
     <string name="content_is_not_empty">内容不能为空</string>
-    <string name="phone_is_uncorrent">手机号格式有误</string>
+    <string name="phone_is_uncorrent">邮箱格式有误</string>
     <string name="please_login_first">请先登录</string>
     <string name="shibie_failed">图片识别失败</string>
     <string name="network_is_unavaliable">网络未连接</string>
     <string name="permission_request_failed">权限申请失败</string>
+    <string name="danjian">单件</string>
+    <string name="duojian">多件</string>
+    <string name="queren">确认</string>
+    <string name="queren_continue">确认并继续扫描</string>
+    <string name="please_do_not_scan_again">请不要重复扫描</string>
+    <string name="please_scan_danjian">请扫描单件</string>
+    <string name="please_scan_duojian">请扫描多件</string>
+    <string name="scan_title">扫描条码</string>
+    <string name="scan_duojian">扫描多件单号</string>
+    <string name="in_transit">运输中</string>
+    <string name="ok_continue_scan_duojian">是否继续扫描多件</string>
     <!-- 二维码扫描 end-->
 </resources>

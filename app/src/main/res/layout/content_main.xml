@@ -47,7 +47,7 @@
             android:id="@+id/tv_waybill_no"
             android:gravity="center_vertical|start"
             android:hint="@string/please_input_waybill_no"
-            android:textSize="20sp" />
+            android:textSize="50px" />
 
         <ImageView
             android:background="@drawable/btn_selector"

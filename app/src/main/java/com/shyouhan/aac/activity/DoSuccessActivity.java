@@ -1,6 +1,7 @@
 package com.shyouhan.aac.activity;
 
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -64,7 +65,16 @@ public class DoSuccessActivity extends BaseActivity {
                 break;
             case ProcessType.REQUEST_CODE_ARRIVEPLACE:
                 tvTitle.setText(R.string.arrival_station);
-                tvContent.setText(R.string.shipments_arrive_at_Station);
+                if (null !=  getIntent().getStringExtra(AppConstant.FAKEIDSTR)) {
+                    String fakeIsStr = getIntent().getStringExtra(AppConstant.FAKEIDSTR);
+                    if (!TextUtils.isEmpty(fakeIsStr)) {
+                        tvContent.setText("（"+fakeIsStr+"）\r\n"+getString(R.string.shipments_arrive_at_Station));
+                    }else{
+                        tvContent.setText(R.string.shipments_arrive_at_Station);
+                    }
+                }else{
+                    tvContent.setText(R.string.shipments_arrive_at_Station);
+                }
                 break;
             case ProcessType.REQUEST_CODE_DELIVERY:
                 tvTitle.setText(R.string.delivery);

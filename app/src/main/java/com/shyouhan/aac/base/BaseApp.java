@@ -17,6 +17,7 @@ import java.io.File;
 
 import com.shyouhan.aac.http.Api;
 import com.shyouhan.aac.http.XXApi;
+import com.shyouhan.aac.widget.CrashHandler;
 import com.shyouhan.aac.widget.LogUtils;
 import com.shyouhan.aac.widget.Utils;
 
@@ -34,7 +35,9 @@ import okhttp3.ResponseBody;
 
 public class BaseApp extends Application {
     private static BaseApp instance;
-//    private PersistentCookieStore persistentCookieStore;
+    public static final String savePath = Environment.getExternalStorageDirectory().getPath() + "/AAc/aac";
+
+    //    private PersistentCookieStore persistentCookieStore;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -52,7 +55,8 @@ public class BaseApp extends Application {
 //        x.Ext.init(this);
 //        x.Ext.setDebug(BuildConfig.DEBUG); // 是否输出debug日志, 开启debug会影响性能.
 //        persistentCookieStore = new PersistentCookieStore(this);
-
+        //错误日志
+        CrashHandler.getInstance().init(BaseApp.this);
         XXApi.registerProvider(new NetProvider() {
             @Override
             public String configBaseUrl() {

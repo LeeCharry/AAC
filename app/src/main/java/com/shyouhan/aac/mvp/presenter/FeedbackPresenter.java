@@ -30,14 +30,14 @@ public class FeedbackPresenter extends BasePresenter<FeedbackContract.Model,Feed
         super.handleResponseError(context, e);
     }
 
-    public void feedback(String username,String phone,String content) {
+    public void feedback(String username,String email,String content) {
         mRootview.showLoading();
         if (!isNetworkConnected()) {
             ToastUtils.showShort(R.string.network_is_unavaliable);
             mRootview.hideLoading();
             return;
         }
-        RequestParam requestParam = new RequestParam(username, "",phone, content);
+        RequestParam requestParam = new RequestParam(username, "",email, content);
         mMoudle.feedback(requestParam)
                 .retryWhen(new RetryWithDelay(3, 2))//遇到错误时重试,第一个参数为重试几次,第二个参数为重试的间隔
                 .compose(XXApi.<BaseObject>getApiTransformer())

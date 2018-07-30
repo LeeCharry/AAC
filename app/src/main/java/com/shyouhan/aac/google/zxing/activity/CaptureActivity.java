@@ -38,6 +38,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tulib.util.utils.DeviceUtil;
@@ -100,6 +101,7 @@ public class CaptureActivity extends AppCompatActivity implements Callback {
     public static final String INTENT_EXTRA_KEY_QR_SCAN = "qr_scan_result";
     private boolean isOpen = false;
     private int processType = -1;
+    private TextView tvScanTitle;
 
     /**
      * Called when the activity is first created.
@@ -112,6 +114,7 @@ public class CaptureActivity extends AppCompatActivity implements Callback {
         CameraManager.init(getApplication());
 
         setImmersiveStatus(this);
+        tvScanTitle = findViewById(R.id.tv_scan_title);
         viewfinderView = findViewById(R.id.viewfinder_content);
         back = findViewById(R.id.scanner_toolbar_back);
         back.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +129,9 @@ public class CaptureActivity extends AppCompatActivity implements Callback {
 
         //获取从上一界面传来的数据
         processType = getIntent().getIntExtra(AppConstant.PROCESS_TYPE, -1);
-
+        if (processType == ProcessType.REQUEST_CODE_FAKE_PACK){
+            tvScanTitle.setText(R.string.scan_duojian);
+        }
 
         /**
          * 开关灯

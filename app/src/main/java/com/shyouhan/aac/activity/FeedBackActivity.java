@@ -23,7 +23,7 @@ import com.shyouhan.aac.widget.ToastUtils;
  */
 public class FeedBackActivity extends BaseActivity implements FeedbackContract.View{
     private EditText etName;
-    private EditText etPhone;
+    private EditText etEmail;
     private EditText etContent;
     private Button btnSubmit;
     private FeedbackPresenter presenter;
@@ -47,7 +47,7 @@ public class FeedBackActivity extends BaseActivity implements FeedbackContract.V
     }
     private void findId() {
         etName = findViewById(R.id.et_name);
-        etPhone = findViewById(R.id.et_phone);
+        etEmail = findViewById(R.id.et_phone);
         etContent = findViewById(R.id.et_content);
         btnSubmit = findViewById(R.id.btn_submit);
 
@@ -55,14 +55,14 @@ public class FeedBackActivity extends BaseActivity implements FeedbackContract.V
             @Override
             public void onClick(View v) {
                 if (checkInfo()) {
-                    presenter.feedback(etName.getText().toString(),etPhone.getText().toString(),etContent.getText().toString());
+                    presenter.feedback(etName.getText().toString(), etEmail.getText().toString(),etContent.getText().toString());
                 }
             }
         });
     }
 
     private boolean checkInfo() {
-        String phone = etPhone.getText().toString();
+        String phone = etEmail.getText().toString();
         if (TextUtils.isEmpty(  etName.getText().toString())) {
             ToastUtils.showShort(R.string.name_is_not_empty);
             return false;
@@ -75,7 +75,7 @@ public class FeedBackActivity extends BaseActivity implements FeedbackContract.V
             ToastUtils.showShort(R.string.content_is_not_empty);
             return false;
         }
-        if (!RegexUtils.isMobileSimple(phone) && !RegexUtils.isMobileExact(phone) && !RegexUtils.isTWMobile(phone)) {
+        if (!RegexUtils.isEmail(phone)) {
             ToastUtils.showShort(R.string.phone_is_uncorrent);
             return false;
         }
@@ -91,7 +91,7 @@ public class FeedBackActivity extends BaseActivity implements FeedbackContract.V
     protected void setTextString() {
         tvTitle.setText(R.string.feed_back);
         etName.setHint(R.string.please_input_name);
-        etPhone.setHint(R.string.please_input_phone_no);
+        etEmail.setHint(R.string.please_input_phone_no);
         etContent.setHint(R.string.please_input_feed_back_content);
         btnSubmit.setText(R.string.submit);
     }

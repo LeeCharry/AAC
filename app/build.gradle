@@ -7,13 +7,19 @@ android {
         applicationId "com.shyouhan.aac"
         minSdkVersion 17
         targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0.2"
 
         //只保留中文简体和中文繁体
         resConfigs "zh","zh-rTW"
     }
     signingConfigs {
+        debug {
+            storeFile file("E:/aac_keystore/licy.jks")
+            storePassword "123456"
+            keyAlias "lcy"
+            keyPassword "123456"
+        }
         release {
             storeFile file("E:/aac_keystore/licy.jks")
             storePassword "123456"
@@ -39,5 +45,5 @@ dependencies {
     implementation project(':tulib')
     implementation 'com.android.support:recyclerview-v7:27.+'
     //ZXing
-    compile 'com.google.zxing:core:3.3.0'
+    compile 'com.google.zxing:core:3.3.3'
 }

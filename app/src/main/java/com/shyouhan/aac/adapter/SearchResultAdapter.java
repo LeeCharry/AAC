@@ -60,6 +60,9 @@ public class SearchResultAdapter extends BaseQuickAdapter<PackStatusBean.StatusB
             case AppConstant.TRANSFER:
                 tvStatus.setText(R.string.has_transfer);
                 break;
+            case AppConstant.JIADAN:
+                tvStatus.setText(R.string.in_transit);
+                break;
             case AppConstant.ARRIVEPLACE:
                 tvStatus.setText(R.string.has_arriveplace);
                 break;

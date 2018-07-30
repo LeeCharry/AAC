@@ -120,8 +120,12 @@ public abstract class BaseActivity extends XActivity {
             else{
                 view.setBackgroundColor(context.getResources().getColor(R.color.ltgray));
             }
-            systeiew.getChildAt(0).setFitsSystemWindows(true);
-            systeiew.addView(view,0,layoutParams);
+            try {
+                systeiew.getChildAt(0).setFitsSystemWindows(true);
+                systeiew.addView(view,0,layoutParams);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
     /**
@@ -244,10 +248,91 @@ public abstract class BaseActivity extends XActivity {
 
     }
 
+    /**
+     * 多件扫描
+     * @param context
+     * @param message
+     * @param callBack
+     */
+    protected void showDialogDuo(Context context,String message, final CallBack callBack) {
+        View contentView = LayoutInflater.from(context).inflate(R.layout.dialog_duojian, null);
+        TextView tvMessage = contentView.findViewById(R.id.tv_message);
+        tvMessage.setText(message+"");
+        dialog = new Dialog(context, R.style.style_logout_dialog);
+        // 确认
+        contentView.findViewById(R.id.tv_queren).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                if (null != callBack) {
+                    callBack.onSelect(v);
+                }
+            }
+        });
+        //确认并继续
+        contentView.findViewById(R.id.tv_queren_continue).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                if (null != callBack) {
+                    callBack.onSelect(v);
+                }
+            }
+        });
+        //取消
+        contentView.findViewById(R.id.tv_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                if (null != callBack) {
+                    callBack.onSelect(v);
+                }
+            }
+        });
+        dialog.setContentView(contentView);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
+    }
+
+    /**
+     * 单件，多件选择框
+     * @param context
+     * @param callBack
+     */
+    protected void showCheckDialog(Context context, final CallBack callBack) {
+        View contentView = LayoutInflater.from(context).inflate(R.layout.dialog_select, null);
+        dialog = new Dialog(context, R.style.style_logout_dialog);
+        // 单件
+        contentView.findViewById(R.id.rb_dan).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                if (null != callBack) {
+                    callBack.onSelect(v);
+                }
+            }
+        });
+        //多件
+        contentView.findViewById(R.id.rb_duo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                if (null != callBack) {
+                    callBack.onSelect(v);
+                }
+            }
+        });
+        dialog.setContentView(contentView);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+
+    }
+
 
     public interface CallBack{
         void onConfirm();
-//        void onCancel();
+        void onSelect(View view);
     }
 
     /**

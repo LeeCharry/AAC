@@ -261,20 +261,21 @@ public final class CameraManager {
 
       //修改之后
 //      int width = screenResolution.x * 7 / 10;
-      int width = 887;
+      int width = screenResolution.x * 8 / 10;
+//      int width = 887;
 //      int height = screenResolution.y * 7 / 10;
-//      int height = 369;
-      int height = 420;
+      int height = screenResolution.y * 1 / 5;
+//      int height = 420;
 
-      if(height >= width) { //竖屏
-        height  = width;
-      }
+//      if(height >= width) { //竖屏
+//        height  = width;
+//      }
+//      height  = width;
 //      else { //黑屏
 //        width = height;
 //      }
-
-//      int leftOffset = (screenResolution.x - width) / 2;
-      int leftOffset = 104;
+      int leftOffset = (screenResolution.x - width) / 2;
+//      int leftOffset = 104;
 //      int topOffset = (screenResolution.y - height) / 2;
       int topOffset = 364;
       framingRect = new Rect(leftOffset, topOffset, leftOffset + width, topOffset + height);
