@@ -45,7 +45,6 @@
         android:orientation="vertical">
         <ImageView
             android:layout_marginTop="50px"
-
             android:layout_alignParentRight="true"
             android:layout_alignBottom="@+id/tv_select"
             android:src="@mipmap/ic_duojian"
