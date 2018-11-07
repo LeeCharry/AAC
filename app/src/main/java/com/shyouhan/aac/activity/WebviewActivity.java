@@ -82,7 +82,6 @@ public class WebviewActivity extends BaseActivity implements SwipeRefreshLayout.
                 view.loadUrl(webUrl);
                 return true;
             }
-
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
