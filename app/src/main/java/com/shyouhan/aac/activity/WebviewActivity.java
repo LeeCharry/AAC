@@ -1,7 +1,11 @@
 package com.shyouhan.aac.activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Build;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
@@ -19,17 +23,21 @@ import com.shyouhan.aac.constant.AppConstant;
  * Created by lcy on 2018/7/8.
  */
 
-public class WebviewActivity extends BaseActivity {
+public class WebviewActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
     private WebView webview;
     private String webUrl;
     private LinearLayout ll_root;
     private String webTitle;
+    private SwipeRefreshLayout refreshLayout;
 
 
     @Override
     protected void initView() {
         iniTitlelayout();
+        refreshLayout = findViewById(R.id.refresh_layout);
         webview = findViewById(R.id.webview);
+        refreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
+        refreshLayout.setOnRefreshListener(this);
 
         webUrl = getIntent().getStringExtra(AppConstant.WEB_URL);
 
@@ -74,6 +82,18 @@ public class WebviewActivity extends BaseActivity {
                 view.loadUrl(webUrl);
                 return true;
             }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                loadingDailog.dismiss();
+            }
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                loadingDailog.show();
+            }
         });
         webview.loadUrl(webUrl);
     }
@@ -96,5 +116,15 @@ public class WebviewActivity extends BaseActivity {
                 tvTitle.setText(R.string.precaution);
                 break;
         }
+    }
+
+    @Override
+    public void onRefresh() {
+        new android.os.Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+             refreshLayout.setRefreshing(false);
+            }
+        },1500);
     }
 }

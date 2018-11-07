@@ -61,7 +61,7 @@
     <string name="has_reward">已收货</string>
     <string name="has_sending">已出货</string>
     <string name="has_transfer">转运中</string>
-    <string name="has_arriveplace">抵达站点</string>
+    <string name="has_arriveplace">抵达转运中心</string>
     <string name="has_delivery">派送中</string>
     <string name="has_sign">已签收</string>
     <string name="is_sure_to_delivery">确认派送</string>
@@ -85,5 +85,12 @@
     <string name="scan_duojian">扫描多件单号</string>
     <string name="in_transit">运输中</string>
     <string name="ok_continue_scan_duojian">是否继续扫描多件</string>
+    <string name="please_select_express_no_way">请选择输入单号方式</string>
+    <string name="manual_input">手动输入</string>
+    <string name="scan_barcode">扫描条码</string>
+    <string name="please_input_number">请输入条码</string>
+    <string name="please_input_express_number">请输入运单号</string>
+    <string name="please_input_duo_express_number">请输入多件单号，以英文格式的","分开</string>
+    <!--<string name="duojian_is_uncorrect">多件单号格式有误</string>-->
     <!-- 二维码扫描 end-->
 </resources>

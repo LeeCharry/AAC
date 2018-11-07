@@ -4,10 +4,16 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
     <include layout="@layout/layout_title" />
-    <WebView
-        android:layout_below="@+id/rl_title"
-        android:id="@+id/webview"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </WebView>
+        <WebView
+            android:layout_below="@+id/rl_title"
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </WebView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 </LinearLayout>

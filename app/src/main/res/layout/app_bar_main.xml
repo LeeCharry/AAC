@@ -76,7 +76,7 @@
                         android:gravity="center"
                         android:id="@+id/tv_switch_language"
                         android:text="@string/simple_complex_switch"
-                        android:textColor="@color/white"
+                        android:textColor="#999999"
                         android:textSize="@dimen/home_left_text_size_45_px"/>
                 </com.zhy.autolayout.AutoLinearLayout>
             </android.support.v7.widget.Toolbar>

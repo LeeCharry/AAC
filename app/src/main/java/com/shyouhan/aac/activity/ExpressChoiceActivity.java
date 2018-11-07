@@ -66,6 +66,7 @@ public class ExpressChoiceActivity extends BaseActivity implements ExpressContra
     }
 
     private void initRv() {
+//       datas =  datas.subList(0,4);
         adapter = new ExpressChoiceAdapter(datas);
         recyclerView.setLayoutManager(new LinearLayoutManager(ExpressChoiceActivity.this));
         recyclerView.setAdapter(adapter);

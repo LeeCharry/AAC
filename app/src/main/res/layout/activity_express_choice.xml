@@ -4,22 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/title_bg_ltgray"
     tools:context="com.shyouhan.aac.activity.DoSuccessActivity">
     <include layout="@layout/layout_title" />
+
     <android.support.v7.widget.RecyclerView
-        android:layout_marginTop="28px"
         android:id="@+id/rv"
-        android:background="@color/title_bg_ltgray"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="28px"
+        android:background="@color/title_bg_ltgray" />
     <Button
         android:layout_width="match_parent"
         android:layout_height="127px"
         android:text="@string/confirm"
         android:textSize="40px"
+        android:layout_marginBottom="10dp"
         android:id="@+id/btn_confirm"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="121px"
+        android:layout_marginTop="20px"
         android:layout_marginLeft="151px"
         android:layout_marginRight="151px"
         android:textColor="@color/white"

@@ -9,7 +9,8 @@ public class Api {
     private static ApiCache apiCache;
 
     public static String getURL(){
-        return "http://aac.shyouhan.com/";
+//        return "http://aac.shyouhan.com/";
+        return "http://api.airaac.com/";
     }
     public static ApiService getApiService() {
         synchronized (Api.class){

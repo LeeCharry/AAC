@@ -3,10 +3,17 @@ package com.shyouhan.aac.activity;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.BottomSheetDialog;
+import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
+import android.text.method.DigitsKeyListener;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.shyouhan.aac.ProcessType;
@@ -18,6 +25,7 @@ import com.shyouhan.aac.google.zxing.activity.CaptureActivity;
 import com.shyouhan.aac.mvp.contract.ArrivePlaceContract;
 import com.shyouhan.aac.mvp.presenter.ArrivePlacePresenter;
 import com.shyouhan.aac.widget.ToastUtils;
+import com.zhy.autolayout.AutoLinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +40,7 @@ public class ArriveStationActivity extends BaseActivity implements ArrivePlaceCo
     private ArrivePlacePresenter arrivePlacePresenter;  //抵达站点
     private boolean isDuo = false;  //是否是多件扫描
     private String fakeIdStr = "";
+    private BottomSheetDialog selectDialog;
 
     @Override
     protected void initView() {
@@ -45,14 +54,15 @@ public class ArriveStationActivity extends BaseActivity implements ArrivePlaceCo
          findViewById(R.id.ll_danjian).setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                 intent2CaptureActivity(ProcessType.REQUEST_CODE_ARRIVEPLACE_DAN);
+                 showSelectBottomSheet(ProcessType.REQUEST_CODE_ARRIVEPLACE_DAN);
              }
          });
          //多件
         findViewById(R.id.ll_duojian).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent2CaptureActivity(ProcessType.REQUEST_CODE_ARRIVEPLACE_DUO);  //扫描真单号
+                showSelectBottomSheet(ProcessType.REQUEST_CODE_ARRIVEPLACE_DUO);
+//                intent2CaptureActivity(ProcessType.REQUEST_CODE_ARRIVEPLACE_DUO);  //扫描真单号
             }
         });
     }
@@ -62,6 +72,101 @@ public class ArriveStationActivity extends BaseActivity implements ArrivePlaceCo
             intent.putExtra(AppConstant.PROCESS_TYPE, ProcessType.REQUEST_CODE_FAKE_PACK);
         }
         startActivityForResult(intent, code);
+    }
+
+    public void showSelectBottomSheet(int scanCode) {
+        selectDialog = new BottomSheetDialog(this);
+        selectDialog.setCancelable(true);
+        selectDialog.setCanceledOnTouchOutside(false);
+        selectDialog.setTitle(R.string.please_select_express_no_way);
+
+        View contentView = LayoutInflater.from(this).inflate(R.layout.dialog_bottom_select, null);
+        initContentView(contentView, scanCode);
+        selectDialog.setContentView(contentView);
+
+        selectDialog.show();
+
+    }
+    public void initContentView(View contentView, final int scanCode) {
+        TextView tvManualInput;
+        TextView tvScanBarcode;
+        tvManualInput = contentView.findViewById(R.id.tv_manual_input);
+        tvScanBarcode = contentView.findViewById(R.id.tv_scan_barcode);
+
+        tvManualInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectDialog.dismiss();
+                showNumberInputDialog(scanCode);
+            }
+        });
+        tvScanBarcode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectDialog.dismiss();
+                intent2CaptureActivity(scanCode);
+            }
+        });
+        contentView.findViewById(R.id.tv_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectDialog.dismiss();
+            }
+        });
+    }
+    public void showNumberInputDialog(final int scanCode) {
+               final EditText editText1 = new EditText(this);
+        editText1.setKeyListener(DigitsKeyListener.getInstance("1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"));
+        editText1.setHint(R.string.please_input_express_number);
+        editText1.setTextColor(getResources().getColor(R.color.dark_gray));
+        editText1.setTextSize(16);
+        editText1.setPadding(0,20,0,20);
+
+        final EditText editText2 = new EditText(this);
+        editText2.setKeyListener(DigitsKeyListener.getInstance("1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM,"));
+        editText2.setHint(R.string.please_input_duo_express_number);
+        AlertDialog.Builder builder = new AlertDialog.Builder(ArriveStationActivity.this)
+                .setCustomTitle(LayoutInflater.from(this).inflate(R.layout.custom_title, null));
+        if (scanCode == ProcessType.REQUEST_CODE_ARRIVEPLACE_DUO){
+            AutoLinearLayout autoLinearLayout = new AutoLinearLayout(this);
+            autoLinearLayout.setOrientation(AutoLinearLayout.VERTICAL);
+            autoLinearLayout.setPadding(10,0,10,0);
+
+            editText2.setTextColor(getResources().getColor(R.color.dark_gray));
+            editText2.setTextSize(16);
+            editText2.setPadding(0,20,0,20);
+
+            autoLinearLayout.addView(editText1);
+            autoLinearLayout.addView(editText2);
+
+            builder .setView(autoLinearLayout);
+        }else{
+            builder .setView(editText1);
+        }
+
+//        builder .setView(editText1)
+        builder .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        Intent intent = null;
+                        String result1 = editText1.getText().toString().trim();
+                        if (scanCode == ProcessType.REQUEST_CODE_ARRIVEPLACE_DUO){
+                            //多件
+                            String result2 = editText2.getText().toString().trim();
+                            if (!TextUtils.isEmpty(result1) && !TextUtils.isEmpty(result2)) {
+                                arrivePlacePresenter.arrivePlace(result1,result2);
+                            }
+                        }else{
+                            //单件
+                            if (!TextUtils.isEmpty(result1)) {
+                                arrivePlacePresenter.arrivePlace(result1,"");
+                            }
+                        }
+                    }
+                })
+                .setNegativeButton(R.string.cancel, null)
+                .show();
     }
 
     @Override

@@ -10,7 +10,7 @@
         android:layout_height="61px"
         android:id="@+id/rb"
         android:button="@null"
-        android:background="@drawable/sl_is_selected"
+        android:background="@drawable/ic_unselect"
         android:layout_marginLeft="89px"
         />
     <TextView

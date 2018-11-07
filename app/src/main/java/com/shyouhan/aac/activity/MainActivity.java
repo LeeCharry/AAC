@@ -4,21 +4,28 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.text.method.DigitsKeyListener;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -118,9 +125,10 @@ public class MainActivity extends BaseActivity
     private final static int REQUEST_PERMISSION_CODE_CAMERA = 102;
     private int scanCode;
     private boolean isDuo = false;  //是否是多件
-//    HashMap<String, List<String>> multiplePieces;  //一个多件对应多个假件
-    List<String>  fakePackIds;
+    //    HashMap<String, List<String>> multiplePieces;  //一个多件对应多个假件
+    List<String> fakePackIds;
     private String realPackNum = "";
+    private BottomSheetDialog selectDialog;
 
     @Override
     protected void initView() {
@@ -383,7 +391,7 @@ public class MainActivity extends BaseActivity
             case R.id.ll_arrival_station:  //到达站点
                 if (hasLogin()) {
                     if (requestForCamera(ProcessType.REQUEST_CODE_ARRIVEPLACE)) {
-                        startActivity(new Intent(mContext,ArriveStationActivity.class));
+                        startActivity(new Intent(mContext, ArriveStationActivity.class));
                         //选择单多件
 //                        showCheckDialog(mContext, new CallBack() {
 //                            @Override
@@ -411,24 +419,29 @@ public class MainActivity extends BaseActivity
             case R.id.ll_transfer:  //国内转运
                 if (hasLogin()) {
                     scanCode = ProcessType.REQUEST_CODE_TRANSFER;
-                    if (requestForCamera(ProcessType.REQUEST_CODE_TRANSFER)) {
-                        intent.putExtra(AppConstant.PROCESS_TYPE, ProcessType.REQUEST_CODE_TRANSFER);
-                        startActivity(intent);
-                    }
+                    //显示选择框
+                    showSelectBottomSheet(scanCode);
+
+//                    if (requestForCamera(ProcessType.REQUEST_CODE_TRANSFER)) {
+//                        intent.putExtra(AppConstant.PROCESS_TYPE, ProcessType.REQUEST_CODE_TRANSFER);
+//                        startActivity(intent);
+//                    }
                 }
                 break;
             case R.id.ll_delivery:  //派送
                 if (hasLogin()) {
-                    if (requestForCamera(ProcessType.REQUEST_CODE_DELIVERY)) {
-                        intent2CaptureActivity(ProcessType.REQUEST_CODE_DELIVERY);
-                    }
+                    showSelectBottomSheet(ProcessType.REQUEST_CODE_DELIVERY);
+//                    if (requestForCamera(ProcessType.REQUEST_CODE_DELIVERY)) {
+//                        intent2CaptureActivity(ProcessType.REQUEST_CODE_DELIVERY);
+//                    }
                 }
                 break;
             case R.id.ll_signing:  //签收
                 if (hasLogin()) {
-                    if (requestForCamera(ProcessType.REQUEST_CODE_SIGNING)) {
-                        intent2CaptureActivity(ProcessType.REQUEST_CODE_SIGNING);
-                    }
+                    showSelectBottomSheet(ProcessType.REQUEST_CODE_SIGNING);
+//                    if (requestForCamera(ProcessType.REQUEST_CODE_SIGNING)) {
+//                        intent2CaptureActivity(ProcessType.REQUEST_CODE_SIGNING);
+//                    }
                 }
                 break;
             case R.id.ll_logout:  //退出登录
@@ -443,6 +456,97 @@ public class MainActivity extends BaseActivity
                 }
                 break;
         }
+    }
+
+    public void showSelectBottomSheet(int scanCode) {
+        selectDialog = new BottomSheetDialog(this);
+        selectDialog.setCancelable(true);
+        selectDialog.setCanceledOnTouchOutside(false);
+        selectDialog.setTitle(R.string.please_select_express_no_way);
+
+        View contentView = LayoutInflater.from(this).inflate(R.layout.dialog_bottom_select, null);
+        initContentView(contentView, scanCode);
+        selectDialog.setContentView(contentView);
+
+        selectDialog.show();
+
+    }
+
+    public void initContentView(View contentView, final int scanCode) {
+        TextView tvManualInput;
+        TextView tvScanBarcode;
+        tvManualInput = contentView.findViewById(R.id.tv_manual_input);
+        tvScanBarcode = contentView.findViewById(R.id.tv_scan_barcode);
+
+        tvManualInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectDialog.dismiss();
+                showNumberInputDialog(scanCode);
+            }
+        });
+        tvScanBarcode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectDialog.dismiss();
+                if (scanCode == ProcessType.REQUEST_CODE_TRANSFER) {
+                    //转运
+                    if (requestForCamera(scanCode)) {
+                        Intent intent = new Intent(MainActivity.this, CaptureActivity.class);
+                        intent.putExtra(AppConstant.PROCESS_TYPE, scanCode);
+                        startActivity(intent);
+                    }
+                } else {
+                    //签收，派送
+                    if (requestForCamera(scanCode)) {
+                        intent2CaptureActivity(scanCode);
+                    }
+                }
+            }
+        });
+        contentView.findViewById(R.id.tv_cancel).setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 selectDialog.dismiss();
+             }
+         });
+    }
+
+    public void showNumberInputDialog(final int scanCode) {
+        final EditText editText = new EditText(this);
+        editText.setHint(R.string.please_input_express_number);
+        editText.setKeyListener(DigitsKeyListener.getInstance("1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"));
+        editText.setTextColor(getResources().getColor(R.color.dark_gray));
+        editText.setTextSize(16);
+        editText.setPadding(0,20,0,20);
+
+        new AlertDialog.Builder(MainActivity.this)
+                .setCustomTitle(LayoutInflater.from(this).inflate(R.layout.custom_title,null))
+                .setView(editText)
+                .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        Intent intent = null;
+                        String result = editText.getText().toString().trim();
+                        if (!TextUtils.isEmpty(result)) {
+                            switch (scanCode) {
+                                case ProcessType.REQUEST_CODE_TRANSFER:
+                                    //中转国内快递
+                                    intent = new Intent(MainActivity.this, DomesticTransferActivity.class);
+                                    intent.putExtra(CaptureActivity.INTENT_EXTRA_KEY_QR_SCAN, result);
+                                    startActivity(intent);
+                                    break;
+                                default:
+                                    //派送，签收
+                                    showDialog(scanCode, result);
+                                    break;
+                            }
+                        }
+                    }
+                })
+                .setNegativeButton(R.string.cancel, null)
+                .show();
     }
 
     //6.0以上动态申请拍照权限
@@ -503,7 +607,7 @@ public class MainActivity extends BaseActivity
             intent.putExtra(AppConstant.PROCESS_TYPE, ProcessType.REQUEST_CODE_TRANSFER);
             startActivity(intent);
         } else {
-            startActivityForResult(intent,code);
+            startActivityForResult(intent, code);
         }
     }
 
@@ -683,7 +787,7 @@ public class MainActivity extends BaseActivity
                 } else if (requestCode == ProcessType.REQUEST_CODE_SENDING) {
                     sendingPresenter.sending(result);
                 } else if (requestCode == ProcessType.REQUEST_CODE_ARRIVEPLACE) {
-                    arrivePlacePresenter.arrivePlace(result,"");
+                    arrivePlacePresenter.arrivePlace(result, "");
                 } else if (requestCode == ProcessType.REQUEST_CODE_DELIVERY) {
                     deliveryPresenter.delivery(result);
                 } else if (requestCode == ProcessType.REQUEST_CODE_SIGNING) {
@@ -737,7 +841,8 @@ public class MainActivity extends BaseActivity
 
     /**
      * list转化为 字符串
-//     */
+     * //
+     */
 //    private String getFakeIdStr(List<String> fakePackIds) {
 //        if (fakePackIds != null && fakePackIds.size()>0) {
 //            String fakeIds = "";
@@ -749,7 +854,6 @@ public class MainActivity extends BaseActivity
 //            return "";
 //        }
 //    }
-
     @Override
     protected void onDestroy() {
         try {

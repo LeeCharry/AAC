@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="50px"
+        android:gravity="center"
+        android:textColor="@color/dark_gray"
+        android:text="@string/please_select_express_no_way"
+        android:textSize="50px"/>
+<View
+    style="@style/style_line2"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="45px"
+        android:gravity="center"
+        android:id="@+id/tv_manual_input"
+        android:textColor="@color/colorPrimary"
+        android:text="@string/manual_input"
+        android:background="@drawable/btn_selector"
+        android:textSize="50px"/>
+    <View
+        style="@style/style_line2"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="45px"
+        android:gravity="center"
+        android:id="@+id/tv_scan_barcode"
+        android:textColor="@color/colorPrimary"
+        android:text="@string/scan_barcode"
+        android:background="@drawable/btn_selector"
+        android:textSize="50px"/>
+    <View
+        style="@style/style_line2"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="45px"
+        android:gravity="center"
+        android:background="@drawable/btn_selector"
+        android:id="@+id/tv_cancel"
+        android:textColor="@color/colorPrimary"
+        android:text="@string/cancel"
+        android:textSize="50px"/>
+</com.zhy.autolayout.AutoLinearLayout>

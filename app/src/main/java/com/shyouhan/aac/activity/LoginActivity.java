@@ -33,7 +33,6 @@ public class LoginActivity extends BaseActivity implements LoginContract.View ,V
     private LoginPresenter presenter;
     private boolean isPwdSee = false;
 
-
     @Override
     protected void initView() {
         iniTitlelayout();

@@ -7,6 +7,9 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+
     </style>
 
     <!--<style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar"/>-->
@@ -43,11 +46,19 @@
         <item name="android:layout_height">3px</item>
         <item name="android:background">@color/title_bg_ltgray</item>
     </style>
-
+    <style name="style_line2">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2px</item>
+        <item name="android:background">@color/title_bg_ltgray</item>
+    </style>
     <style name="style_logout_dialog" parent="Base.Theme.AppCompat.Dialog">
         <item name="android:windowIsFloating">true</item><!--悬浮-->
         <item name="android:windowFrame">@null</item><!--无边框-->
         <item name="android:windowNoTitle">true</item><!--没有title-->
         <item name="android:windowIsTranslucent">false</item><!--半透明-->
+    </style>
+
+    <style name="EditTextStyle" parent="Theme.AppCompat.Light">
+
     </style>
 </resources>

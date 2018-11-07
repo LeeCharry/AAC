@@ -1,5 +1,6 @@
 package com.shyouhan.aac.adapter;
 
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -19,8 +20,12 @@ import java.util.Locale;
  */
 
 public class ExpressChoiceAdapter extends BaseQuickAdapter<ExpressBean, BaseViewHolder> {
+    private  ExpressChoiceAdapter adapter;
+    private  List<ExpressBean> data;
     public ExpressChoiceAdapter( List<ExpressBean> data) {
         super(R.layout.item_express_choice, data);
+        this.adapter = this;
+        this.data = data;
     }
 
     @Override
@@ -32,9 +37,26 @@ public class ExpressChoiceAdapter extends BaseQuickAdapter<ExpressBean, BaseView
             helper.setText(R.id.tv_express_name, item.getName());
         }
         if (item.getSelected()){
-            rb.setChecked(true);
+//            rb.setChecked(true);
+            rb.setBackgroundResource(R.drawable.ic_selected);
         } else {
-            rb.setChecked(false);
+//            rb.setChecked(false);
+            rb.setBackgroundResource(R.drawable.ic_unselect);
         }
+        final int position = data.indexOf(item);
+        rb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (!item.getSelected()) {
+                    item.setSelected(true);
+                    for (int i = 0; i < data.size() ; i++) {
+                        if (i != position) {
+                            data.get(i).setSelected(false);
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            }
+        });
     }
 }

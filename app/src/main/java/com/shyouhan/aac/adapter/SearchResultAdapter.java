@@ -37,11 +37,12 @@ public class SearchResultAdapter extends BaseQuickAdapter<PackStatusBean.StatusB
 
         String date = DateUtil.getDate3(time);
         String[] split = date.split(" ");
-        if (DateUtil.isToday(time)){
-            helper.setText(R.id.tv_date,R.string.today);
-        }else{
-            helper.setText(R.id.tv_date,split[0]);
-        }
+//        if (DateUtil.isToday(time)){
+//            helper.setText(R.id.tv_date,R.string.today);
+//        }else{
+//            helper.setText(R.id.tv_date,split[0]);
+//        }
+        helper.setText(R.id.tv_date,split[0]);
         helper.setText(R.id.tv_time,split[1]);
         String status = item.getStatus();
         TextView tvStatus = helper.getView(R.id.tv_state);
