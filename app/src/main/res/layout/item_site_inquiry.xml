@@ -37,7 +37,6 @@
             android:textColor="#898989"
             android:textSize="@dimen/home_left_text_size_45_px"
             />
-
         <TextView
             android:singleLine="true"
             android:layout_width="match_parent"
