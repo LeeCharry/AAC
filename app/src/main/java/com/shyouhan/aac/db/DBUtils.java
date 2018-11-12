@@ -42,12 +42,10 @@ public class DBUtils {
             db = null;
         }
     }
-
     public boolean deleteDatabase() {
         dbHelper = new MyDatabaseHelper(con, AppConstant.dbName, AppConstant.dbVer);
         return dbHelper.deleteDataBase(con);
     }
-
     // 插入数据
     public void insert(String tablename, String[] clomname, String[] clomstr) {
         try {
@@ -116,7 +114,6 @@ public class DBUtils {
         for (int i = 0; i < cursor.getCount(); i++) {
             cursor.moveToNext();
             datas.add(cursor.getString(cursor.getColumnIndex("pickid")));
-//			datas.add(cursor.getColumnName(cursor.getColumnIndex("pickid")));
         }
         cursor.close();
         closeDataBase();

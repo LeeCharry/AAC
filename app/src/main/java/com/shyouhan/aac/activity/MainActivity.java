@@ -238,14 +238,15 @@ public class MainActivity extends BaseActivity
             @Override
             public void OnBannerClick(int position) {
                 //跳转页面
-                Intent intent = new Intent(MainActivity.this, WebviewActivity.class);
-                intent.putExtra(AppConstant.WEB_TITLE, bannerTitleList.get(position - 1));
-                intent.putExtra(AppConstant.WEB_URL, bannerList.get(position - 1).getLink());
-                startActivity(intent);
+                if (!bannerList.get(position - 1).getLink().contains("##")) {
+                    Intent intent = new Intent(MainActivity.this, WebviewActivity.class);
+                    intent.putExtra(AppConstant.WEB_TITLE, bannerTitleList.get(position - 1));
+                    intent.putExtra(AppConstant.WEB_URL, bannerList.get(position - 1).getLink());
+                    startActivity(intent);
+                }
             }
         });
     }
-
 
     /**
      * 设置侧边栏布局
@@ -330,6 +331,14 @@ public class MainActivity extends BaseActivity
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(MainActivity.this, CaptureActivity.class);
+        String webUrlParam;
+        if (isTranditional()) {
+            //繁体
+            webUrlParam = "&l=2";
+        }else{
+            //简体
+            webUrlParam = "&l=1";
+        }
         switch (v.getId()) {
             case R.id.ll_search_box:  //运单查询
                 startActivity(new Intent(MainActivity.this, ShipmentInquiryActivity.class));
@@ -347,17 +356,17 @@ public class MainActivity extends BaseActivity
                 break;
             case R.id.ll_server_intro:  //服务介绍
                 intent = new Intent(MainActivity.this, WebviewActivity.class);
-                intent.putExtra(AppConstant.WEB_URL, AppConstant.INTROSERVICE_URL);
+                intent.putExtra(AppConstant.WEB_URL, AppConstant.INTROSERVICE_URL+webUrlParam);
                 startActivity(intent);
                 break;
             case R.id.ll_precaution:  //注意事项
                 intent = new Intent(MainActivity.this, WebviewActivity.class);
-                intent.putExtra(AppConstant.WEB_URL, AppConstant.PRECAUTIONS_URL);
+                intent.putExtra(AppConstant.WEB_URL, AppConstant.PRECAUTIONS_URL+webUrlParam);
                 startActivity(intent);
                 break;
             case R.id.ll_important_matters:  //重要事项
                 intent = new Intent(MainActivity.this, WebviewActivity.class);
-                intent.putExtra(AppConstant.WEB_URL, AppConstant.IMPORTANT_URL);
+                intent.putExtra(AppConstant.WEB_URL, AppConstant.IMPORTANT_URL+webUrlParam);
                 startActivity(intent);
                 break;
             case R.id.ll_feed_back:  //意见反馈
