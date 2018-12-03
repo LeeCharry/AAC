@@ -62,7 +62,6 @@ public class ArriveStationActivity extends BaseActivity implements ArrivePlaceCo
             @Override
             public void onClick(View v) {
                 showSelectBottomSheet(ProcessType.REQUEST_CODE_ARRIVEPLACE_DUO);
-//                intent2CaptureActivity(ProcessType.REQUEST_CODE_ARRIVEPLACE_DUO);  //扫描真单号
             }
         });
     }

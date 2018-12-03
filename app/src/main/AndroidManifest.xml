@@ -43,6 +43,12 @@
             android:name="com.shyouhan.aac.google.zxing.activity.CaptureActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.TestActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
         <!--闪屏页-->
         <activity android:name="com.shyouhan.aac.activity.SplashActivity"
             android:screenOrientation="portrait"
@@ -111,6 +117,7 @@
         <activity android:name=".activity.ArriveStationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.shyouhan.aac"
