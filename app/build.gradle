@@ -9,7 +9,6 @@ android {
         targetSdkVersion 27
         versionCode 6
         versionName "1.0.6"
-
         //只保留中文简体和中文繁体
         resConfigs "zh","zh-rTW"
     }
