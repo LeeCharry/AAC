@@ -1,13 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<com.zhy.autolayout.AutoLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <include layout="@layout/layout_title"/>
     <EditText
-        android:textSize="18dp"
-        android:padding="5dp"
+        android:layout_marginLeft="20px"
+        android:layout_marginTop="10px"
+        android:layout_marginRight="20px"
+        android:layout_marginBottom="10px"
+        android:textSize="38px"
+      android:paddingTop="20px"
+        android:paddingBottom="20px"
         android:text=""
+        android:paddingLeft="30px"
+        android:background="@drawable/sp_et_scan_bar_gun"
         android:id="@+id/et_input"
         android:gravity="start"
         android:textColor="@color/black"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="320px" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="处理结果"
+        android:paddingLeft="30px"
+        android:paddingTop="15px"
+        android:paddingBottom="15px"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:paddingLeft="30px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </com.zhy.autolayout.AutoLinearLayout>
