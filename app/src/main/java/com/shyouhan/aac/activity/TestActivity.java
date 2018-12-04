@@ -38,7 +38,6 @@ public class TestActivity extends BaseActivity {
         rlTitle = (AutoRelativeLayout) findViewById(R.id.rl_title);
         etInput = (EditText) findViewById(R.id.et_input);
         recyclerview = (RecyclerView) findViewById(R.id.recyclerview);
-
         tvTitle.setText("扫码枪");
         tvTitle.setTextColor(Color.BLACK);
         
