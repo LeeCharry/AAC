@@ -141,7 +141,6 @@ public class ShipmentInquiryActivity extends BaseActivity implements View.OnClic
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
         itemTouchHelper.attachToRecyclerView(rvHistory);
     }
-
     private void findId() {
         llSearchBox = findViewById(R.id.ll_search_box);
         etWaybillNo = findViewById(R.id.et_waybill_no);
@@ -152,7 +151,6 @@ public class ShipmentInquiryActivity extends BaseActivity implements View.OnClic
         ivScan.setOnClickListener(this);
         btnInquiry.setOnClickListener(this);
     }
-
     @Override
     protected int getLayoutResId() {
         return R.layout.activity_shipment_inquiry;
