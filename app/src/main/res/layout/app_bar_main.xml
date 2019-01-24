@@ -14,7 +14,7 @@
         app:title_background="#77ffffff"
         app:indicator_drawable_selected="@mipmap/ic_dot_white"
         app:indicator_drawable_unselected="@mipmap/ic_dot_gray"
-        app:title_textcolor="@color/white"
+        app:title_textcolor="#999999"
         app:indicator_height="22px"
         app:indicator_width="22px"
         android:fitsSystemWindows="true"
@@ -60,7 +60,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="@string/app_name"
-                        android:textColor="@color/white"
+                        android:textColor="#999999"
                         android:textSize="@dimen/title_size_56_px"/>
 
                     <ImageView

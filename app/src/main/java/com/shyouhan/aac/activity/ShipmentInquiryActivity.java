@@ -174,14 +174,12 @@ public class ShipmentInquiryActivity extends BaseActivity implements View.OnClic
                 break;
         }
     }
-
     @Override
     protected void setTextString() {
         tvTitle.setText(R.string.shippment_inquiry);
         etWaybillNo.setHint(R.string.please_input_waybill_no);
         btnInquiry.setText(R.string.inquiry);
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -204,12 +202,9 @@ public class ShipmentInquiryActivity extends BaseActivity implements View.OnClic
     public void hideLoading() {
         loadingDailog.dismiss();
     }
-
     @Override
     public void showMessage(String msg) {
-
     }
-
     @Override
     public void launchActivity(Intent intent) {
     }
