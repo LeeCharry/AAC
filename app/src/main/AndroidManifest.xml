@@ -43,19 +43,19 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".activity.TestActivity"
+        <activity android:name=".activity.ScanGunActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"/>
+
+        <!--闪屏页-->
+        <activity android:name="com.shyouhan.aac.activity.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <!--闪屏页-->
-        <activity android:name="com.shyouhan.aac.activity.SplashActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-
         </activity>
         <!-- 首页 -->
         <activity

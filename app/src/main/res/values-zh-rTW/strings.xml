@@ -88,7 +88,13 @@
     <string name="please_select_express_no_way">請選擇輸入單號方式</string>
     <string name="manual_input">手動輸入</string>
     <string name="scan_barcode">掃描條碼</string>
+    <string name="scan_gun">掃碼槍</string>
+    <string name="cljg">處理結果</string>
+    <string name="qdjzl">請點擊這裡</string>
+
     <string name="please_input_express_number">請輸入運單號</string>
+    <string name="please_input_fake_express_number">請輸入假單號</string>
+
     <string name="please_input_duo_express_number">請輸入多件單號，以英文格式的","分開</string>
     <string name="please_input_number">請輸入條碼</string>
     <!-- 二维码扫描 end-->

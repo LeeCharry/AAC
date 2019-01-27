@@ -88,8 +88,12 @@
     <string name="please_select_express_no_way">请选择输入单号方式</string>
     <string name="manual_input">手动输入</string>
     <string name="scan_barcode">扫描条码</string>
+    <string name="scan_gun">扫码枪</string>
+    <string name="qdjzl">请点击这里</string>
+    <string name="cljg">处理结果</string>
     <string name="please_input_number">请输入条码</string>
     <string name="please_input_express_number">请输入运单号</string>
+    <string name="please_input_fake_express_number">请输入假单号</string>
     <string name="please_input_duo_express_number">请输入多件单号，以英文格式的","分开</string>
     <!--<string name="duojian_is_uncorrect">多件单号格式有误</string>-->
     <!-- 二维码扫描 end-->

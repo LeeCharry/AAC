@@ -22,6 +22,8 @@ public class AppConstant {
     public static final String SENDING = "sending";
     public static final String TRANSFER = "transfer";
     public static final String ARRIVEPLACE = "arriveplace";
+    public static final String ARRIVEPLACE_DUO = "arriveplace_duo";
+    public static final String ARRIVEPLACE_DAN = "arriveplace_dan";
     public static final String JIADAN = "jiadan";
     public static final String DELIVERY = "delivery";
     public static final String SIGN = "sign";

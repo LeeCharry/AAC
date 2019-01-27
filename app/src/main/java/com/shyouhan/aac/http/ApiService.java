@@ -37,6 +37,15 @@ public interface ApiService {
     Observable<BaseObject> arriveplace(@Body RequestParam requestParam);
 
     /**
+     * 抵达站所(多件)
+     * @param requestParam
+     * @return
+     */
+    @POST("logistic/package/fake")
+    Observable<BaseObject> fake(@Body RequestParam requestParam);
+
+
+    /**
      * 派送
      * @param requestParam
      * @return

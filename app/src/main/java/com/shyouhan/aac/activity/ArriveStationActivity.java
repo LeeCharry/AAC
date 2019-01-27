@@ -1,8 +1,6 @@
 package com.shyouhan.aac.activity;
 
 
-import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +8,6 @@ import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.text.method.DigitsKeyListener;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -23,9 +20,10 @@ import com.shyouhan.aac.bean.BaseObject;
 import com.shyouhan.aac.constant.AppConstant;
 import com.shyouhan.aac.google.zxing.activity.CaptureActivity;
 import com.shyouhan.aac.mvp.contract.ArrivePlaceContract;
+import com.shyouhan.aac.mvp.contract.FakeContract;
 import com.shyouhan.aac.mvp.presenter.ArrivePlacePresenter;
+import com.shyouhan.aac.mvp.presenter.FakePresenter;
 import com.shyouhan.aac.widget.ToastUtils;
-import com.zhy.autolayout.AutoLinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,10 +32,11 @@ import java.util.List;
 /**
  * 抵达站点
  */
-public class ArriveStationActivity extends BaseActivity implements ArrivePlaceContract.View{
+public class ArriveStationActivity extends BaseActivity implements ArrivePlaceContract.View,FakeContract.View{
     List<String> fakePackIds = new ArrayList<>();
     private String realPackNum = "";
     private ArrivePlacePresenter arrivePlacePresenter;  //抵达站点
+    private FakePresenter fakePresenter;  //假单
     private boolean isDuo = false;  //是否是多件扫描
     private String fakeIdStr = "";
     private BottomSheetDialog selectDialog;
@@ -46,6 +45,7 @@ public class ArriveStationActivity extends BaseActivity implements ArrivePlaceCo
     protected void initView() {
         iniTitlelayout();
         arrivePlacePresenter = new ArrivePlacePresenter(this,this);
+        fakePresenter = new FakePresenter(this,this);
         findId();
         setTextString();
     }
@@ -67,8 +67,8 @@ public class ArriveStationActivity extends BaseActivity implements ArrivePlaceCo
     }
     private void intent2CaptureActivity(int code) {
         Intent intent = new Intent(ArriveStationActivity.this, CaptureActivity.class);
-        if (code == ProcessType.REQUEST_CODE_FAKE_PACK) {
-            intent.putExtra(AppConstant.PROCESS_TYPE, ProcessType.REQUEST_CODE_FAKE_PACK);
+        if (code == ProcessType.REQUEST_CODE_ARRIVEPLACE_DUO) {
+            intent.putExtra(AppConstant.PROCESS_TYPE, ProcessType.REQUEST_CODE_ARRIVEPLACE_DUO);
         }
         startActivityForResult(intent, code);
     }
@@ -79,7 +79,7 @@ public class ArriveStationActivity extends BaseActivity implements ArrivePlaceCo
         selectDialog.setCanceledOnTouchOutside(false);
         selectDialog.setTitle(R.string.please_select_express_no_way);
 
-        View contentView = LayoutInflater.from(this).inflate(R.layout.dialog_bottom_select, null);
+        View contentView = LayoutInflater.from(this).inflate(R.layout.dialog_bottom_select2, null);
         initContentView(contentView, scanCode);
         selectDialog.setContentView(contentView);
 
@@ -88,9 +88,10 @@ public class ArriveStationActivity extends BaseActivity implements ArrivePlaceCo
     }
     public void initContentView(View contentView, final int scanCode) {
         TextView tvManualInput;
-        TextView tvScanBarcode;
+        TextView tvScanBarcode,tv_scan_gun;
         tvManualInput = contentView.findViewById(R.id.tv_manual_input);
         tvScanBarcode = contentView.findViewById(R.id.tv_scan_barcode);
+        tv_scan_gun = contentView.findViewById(R.id.tv_scan_gun);
 
         tvManualInput.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +107,17 @@ public class ArriveStationActivity extends BaseActivity implements ArrivePlaceCo
                 intent2CaptureActivity(scanCode);
             }
         });
+
+        //扫码枪
+        tv_scan_gun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectDialog.dismiss();
+
+                intent2ScanGunActivity(scanCode);
+
+            }
+        });
         contentView.findViewById(R.id.tv_cancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,6 +125,13 @@ public class ArriveStationActivity extends BaseActivity implements ArrivePlaceCo
             }
         });
     }
+
+    private void intent2ScanGunActivity(int scanCode) {
+        Intent intent = new Intent(ArriveStationActivity.this, ScanGunActivity.class);
+        intent.putExtra("scancode",scanCode);
+        startActivityForResult(intent,1);
+    }
+
     public void showNumberInputDialog(final int scanCode) {
                final EditText editText1 = new EditText(this);
         editText1.setKeyListener(DigitsKeyListener.getInstance("1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"));
@@ -121,7 +140,10 @@ public class ArriveStationActivity extends BaseActivity implements ArrivePlaceCo
         editText1.setTextSize(16);
         editText1.setPadding(0,20,0,20);
 
-        final EditText editText2 = new EditText(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(ArriveStationActivity.this)
+                .setCustomTitle(LayoutInflater.from(this).inflate(R.layout.custom_title, null));
+
+        /*final EditText editText2 = new EditText(this);
         editText2.setKeyListener(DigitsKeyListener.getInstance("1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM,"));
         editText2.setHint(R.string.please_input_duo_express_number);
         AlertDialog.Builder builder = new AlertDialog.Builder(ArriveStationActivity.this)
@@ -141,9 +163,12 @@ public class ArriveStationActivity extends BaseActivity implements ArrivePlaceCo
             builder .setView(autoLinearLayout);
         }else{
             builder .setView(editText1);
+        }*/
+        if (scanCode == ProcessType.REQUEST_CODE_ARRIVEPLACE_DUO){
+            editText1.setHint(R.string.please_input_fake_express_number);
         }
+        builder .setView(editText1);
 
-//        builder .setView(editText1)
         builder .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -152,10 +177,15 @@ public class ArriveStationActivity extends BaseActivity implements ArrivePlaceCo
                         String result1 = editText1.getText().toString().trim();
                         if (scanCode == ProcessType.REQUEST_CODE_ARRIVEPLACE_DUO){
                             //多件
-                            String result2 = editText2.getText().toString().trim();
-                            if (!TextUtils.isEmpty(result1) && !TextUtils.isEmpty(result2)) {
-                                arrivePlacePresenter.arrivePlace(result1,result2);
+//                            String result2 = editText2.getText().toString().trim();
+//                            if (!TextUtils.isEmpty(result1) && !TextUtils.isEmpty(result2)) {
+//                                arrivePlacePresenter.arrivePlace(result1,result2);
+//                            }
+
+                            if (!TextUtils.isEmpty(result1)) {
+                                fakePresenter.fake(result1);
                             }
+
                         }else{
                             //单件
                             if (!TextUtils.isEmpty(result1)) {
@@ -171,78 +201,84 @@ public class ArriveStationActivity extends BaseActivity implements ArrivePlaceCo
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == 2) {
+            //扫码枪页面返回
+            this.finish();
+        }
         if (resultCode == CaptureActivity.RESULT_CODE_QR_SCAN) {
             Bundle extra = data.getExtras();
             String result = extra.getString(CaptureActivity.INTENT_EXTRA_KEY_QR_SCAN);
             switch (requestCode) {
                 case ProcessType.REQUEST_CODE_ARRIVEPLACE_DAN:
-                    showDialogDan(result);
+                    showDialogDan(result,requestCode);
                     break;
                 case ProcessType.REQUEST_CODE_ARRIVEPLACE_DUO:
-                    realPackNum = result;
-                    showDialogDuo1(result);
+//                    realPackNum = result;
+//                    showDialogDuo1(result);
+
+                    showDialogDan(result,requestCode);
                     break;
-                case ProcessType.REQUEST_CODE_FAKE_PACK:
-                    if (!fakePackIds.contains(result)){
-                        fakePackIds.add(result);
-                    }else{
-                        ToastUtils.showShort(R.string.please_do_not_scan_again);
-                    }
-                    showDialogDuo(result);
-                    break;
+//                case ProcessType.REQUEST_CODE_FAKE_PACK:
+//                    if (!fakePackIds.contains(result)){
+//                        fakePackIds.add(result);
+//                    }else{
+//                        ToastUtils.showShort(R.string.please_do_not_scan_again);
+//                    }
+//                    showDialogDuo(result);
+//                    break;
             }
         }
     }
-    //确认并继续扫描多件
-    protected void showDialogDuo1(String result) {
-        String string1 = "";
-        String string2 = "";
-        string1 = getString(R.string.waybill_no3) + " ";
-        string2 = getString(R.string.ok_continue_scan_duojian);
-        showdialog(ArriveStationActivity.this, string1 + result + "\r\n" + string2, new CallBack() {
-            @Override
-            public void onConfirm() {
-                intent2CaptureActivity(ProcessType.REQUEST_CODE_FAKE_PACK);  //扫描假件
+//    //确认并继续扫描多件
+//    protected void showDialogDuo1(String result) {
+//        String string1 = "";
+//        String string2 = "";
+//        string1 = getString(R.string.waybill_no3) + " ";
+//        string2 = getString(R.string.ok_continue_scan_duojian);
+//        showdialog(ArriveStationActivity.this, string1 + result + "\r\n" + string2, new CallBack() {
+//            @Override
+//            public void onConfirm() {
+//                intent2CaptureActivity(ProcessType.REQUEST_CODE_FAKE_PACK);  //扫描假件
+//
+//            }
+//
+//            @Override
+//            public void onSelect(View view) {
+//
+//            }
+//        });
+//
+//    }
 
-            }
-
-            @Override
-            public void onSelect(View view) {
-
-            }
-        });
-
-    }
-
-    private void showDialogDuo(String result) {
-        String string1 = "";
-        String string2 = "";
-        string1 = getString(R.string.waybill_no3) + " ";
-        string2 = getString(R.string.is_sure_to_arriveplace);
-         fakeIdStr = getFakeIdStr(fakePackIds);
-        showDialogDuo(ArriveStationActivity.this,string1 + result + "\r\n" + string2 , new CallBack() {
-            @Override
-            public void onConfirm() {
-            }
-            @Override
-            public void onSelect(View view) {
-                switch (view.getId()) {
-                    case R.id.tv_queren:
-                        isDuo = true;
-                        arrivePlacePresenter.arrivePlace(realPackNum,fakeIdStr);
-                        break;
-                    case R.id.tv_queren_continue:
-                        intent2CaptureActivity(ProcessType.REQUEST_CODE_FAKE_PACK);
-                        break;
-                    case R.id.tv_cancel:
-                        //取消
-                        realPackNum = "";
-                        fakePackIds.clear();
-                        break;
-                }
-            }
-        });
-    }
+//    private void showDialogDuo(String result) {
+//        String string1 = "";
+//        String string2 = "";
+//        string1 = getString(R.string.waybill_no3) + " ";
+//        string2 = getString(R.string.is_sure_to_arriveplace);
+//         fakeIdStr = getFakeIdStr(fakePackIds);
+//        showDialogDuo(ArriveStationActivity.this,string1 + result + "\r\n" + string2 , new CallBack() {
+//            @Override
+//            public void onConfirm() {
+//            }
+//            @Override
+//            public void onSelect(View view) {
+//                switch (view.getId()) {
+//                    case R.id.tv_queren:
+//                        isDuo = true;
+//                        arrivePlacePresenter.arrivePlace(realPackNum,fakeIdStr);
+//                        break;
+//                    case R.id.tv_queren_continue:
+//                        intent2CaptureActivity(ProcessType.REQUEST_CODE_FAKE_PACK);
+//                        break;
+//                    case R.id.tv_cancel:
+//                        //取消
+//                        realPackNum = "";
+//                        fakePackIds.clear();
+//                        break;
+//                }
+//            }
+//        });
+//    }
     /**
      * list转化为 字符串
      * @param fakePackIds
@@ -259,7 +295,7 @@ public class ArriveStationActivity extends BaseActivity implements ArrivePlaceCo
         }
     }
 
-    private void showDialogDan(final String result) {
+    private void showDialogDan(final String result, final int requestCode) {
         String string1 = "";
         String string2 = "";
         string1 = getString(R.string.waybill_no3) + " ";
@@ -267,7 +303,12 @@ public class ArriveStationActivity extends BaseActivity implements ArrivePlaceCo
         showdialog(ArriveStationActivity.this, string1 + result + "\r\n" + string2, new CallBack() {
             @Override
             public void onConfirm() {
+                if (requestCode == ProcessType.REQUEST_CODE_ARRIVEPLACE_DUO) {
+                    //假单扫描
+                    fakePresenter.fake(result);
+                }else{
                     arrivePlacePresenter.arrivePlace(result,"");
+                }
             }
 
             @Override
@@ -319,21 +360,37 @@ public class ArriveStationActivity extends BaseActivity implements ArrivePlaceCo
         Intent intent = new Intent(ArriveStationActivity.this, DoSuccessActivity.class);
         intent.putExtra(AppConstant.PROCESS_TIME, baseObject.getTime());
         intent.putExtra(AppConstant.PROCESS_TYPE, ProcessType.REQUEST_CODE_ARRIVEPLACE);
-        if (isDuo){
-            isDuo = false;
-            intent.putExtra(AppConstant.FAKEIDSTR,fakeIdStr);
-        }
+//        if (isDuo){
+//            isDuo = false;
+//            intent.putExtra(AppConstant.FAKEIDSTR,fakeIdStr);
+//        }
         startActivity(intent);
     }
 
     @Override
     public void onArrivePlaceFailed(String error) {
-        realPackNum = "";
-        fakePackIds.clear();
-        if (isDuo) {
-            isDuo = false;
-        }
+//        realPackNum = "";
+//        fakePackIds.clear();
+//        if (isDuo) {
+//            isDuo = false;
+//        }
         showMessage(error);
 
+    }
+
+    @Override
+    public void onFakeSuccess(BaseObject baseObject) {
+        //假单扫描成功
+//        showMessage(baseObject.getMsg());
+
+        Intent intent = new Intent(ArriveStationActivity.this, DoSuccessActivity.class);
+        intent.putExtra(AppConstant.PROCESS_TIME, baseObject.getTime());
+        intent.putExtra(AppConstant.PROCESS_TYPE, ProcessType.REQUEST_CODE_ARRIVEPLACE);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onFakeFailed(String error) {
+        showMessage(error);
     }
 }

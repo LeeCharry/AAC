@@ -37,6 +37,7 @@ public class RequestParam implements Serializable {
      * place : 4Kf4VBLnzQ
      */
     private String place;
+
     /**
      * phone : pVlqweieaf
      * content : OdMjQBPZSH
@@ -81,6 +82,9 @@ public class RequestParam implements Serializable {
         this.packid = packid;
         this.fakepackid = fakepackid;
 //        this.express = express;
+    }
+
+    public RequestParam() {
     }
 
     public RequestParam(String token, String packid) {

@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -56,6 +57,8 @@ public abstract class BaseActivity extends XActivity {
     protected Dialog dialog;
     protected InputMethodManager manager;
     private BottomSheetDialog selectDialog;
+    private MediaPlayer mediaPlayer;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,6 +71,19 @@ public abstract class BaseActivity extends XActivity {
 //        EventBus.getDefault().register(this);
         registBroadCast();
 
+    }
+
+    public void stopMusic() {
+        if (null != mediaPlayer) {
+            mediaPlayer.pause();
+        }
+    }
+
+    public void playMusic() {
+        mediaPlayer = MediaPlayer.create(this, R.raw.sweep_express);
+        //用prepare方法，会报错误java.lang.IllegalStateExceptio
+        //mediaPlayer.prepare();
+        mediaPlayer.start();
     }
 
     private void registBroadCast() {
@@ -211,6 +227,11 @@ public abstract class BaseActivity extends XActivity {
         super.onDestroy();
         if (null != switchLanguageBroadcast) {
             unregisterReceiver(switchLanguageBroadcast);
+        }
+
+        if (null != mediaPlayer) {
+            mediaPlayer.stop();
+            mediaPlayer = null;
         }
     }
 

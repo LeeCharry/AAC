@@ -22,10 +22,8 @@ import android.text.method.DigitsKeyListener;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -64,7 +62,6 @@ import com.zhy.autolayout.AutoRelativeLayout;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -384,9 +381,8 @@ public class MainActivity extends BaseActivity
                 break;
             case R.id.ll_reward:  //收货，揽件
                 if (hasLogin()) {
-                    if (requestForCamera(ProcessType.REQUEST_CODE_REWARD)) {
-                        intent2CaptureActivity(ProcessType.REQUEST_CODE_REWARD);
-                    }
+                    showSelectBottomSheetSJ(ProcessType.REQUEST_CODE_REWARD);
+
                 }
                 break;
             case R.id.ll_shipping:  //出货
@@ -401,27 +397,6 @@ public class MainActivity extends BaseActivity
                 if (hasLogin()) {
                     if (requestForCamera(ProcessType.REQUEST_CODE_ARRIVEPLACE)) {
                         startActivity(new Intent(mContext, ArriveStationActivity.class));
-                        //选择单多件
-//                        showCheckDialog(mContext, new CallBack() {
-//                            @Override
-//                            public void onConfirm() {
-//                            }
-//
-//                            @Override
-//                            public void onSelect(View view) {
-//                                switch (view.getId()) {
-//                                    case R.id.rb_dan:
-//                                        intent2CaptureActivity(ProcessType.REQUEST_CODE_ARRIVEPLACE);
-//                                        break;
-//                                    case R.id.rb_duo:
-//                                        isDuo = true;
-////                                        multiplePieces = new HashMap<>();
-//                                        fakePackIds = new ArrayList<>();
-//                                        intent2CaptureActivity(ProcessType.REQUEST_CODE_ARRIVEPLACE);
-//                                        break;
-//                                }
-//                            }
-//                        });
                     }
                 }
                 break;
@@ -431,18 +406,11 @@ public class MainActivity extends BaseActivity
                     //显示选择框
                     showSelectBottomSheet(scanCode);
 
-//                    if (requestForCamera(ProcessType.REQUEST_CODE_TRANSFER)) {
-//                        intent.putExtra(AppConstant.PROCESS_TYPE, ProcessType.REQUEST_CODE_TRANSFER);
-//                        startActivity(intent);
-//                    }
                 }
                 break;
             case R.id.ll_delivery:  //派送
                 if (hasLogin()) {
-                    showSelectBottomSheet(ProcessType.REQUEST_CODE_DELIVERY);
-//                    if (requestForCamera(ProcessType.REQUEST_CODE_DELIVERY)) {
-//                        intent2CaptureActivity(ProcessType.REQUEST_CODE_DELIVERY);
-//                    }
+                    showSelectBottomSheetPJ(ProcessType.REQUEST_CODE_DELIVERY);
                 }
                 break;
             case R.id.ll_signing:  //签收
@@ -467,6 +435,21 @@ public class MainActivity extends BaseActivity
         }
     }
 
+    //收件
+    public void showSelectBottomSheetSJ(int scanCode) {
+        selectDialog = new BottomSheetDialog(this);
+        selectDialog.setCancelable(true);
+        selectDialog.setCanceledOnTouchOutside(false);
+        selectDialog.setTitle(R.string.please_select_express_no_way);
+
+        View contentView = LayoutInflater.from(this).inflate(R.layout.dialog_bottom_select, null);
+        initContentViewSJ(contentView, scanCode);
+        selectDialog.setContentView(contentView);
+
+        selectDialog.show();
+
+    }
+
     public void showSelectBottomSheet(int scanCode) {
         selectDialog = new BottomSheetDialog(this);
         selectDialog.setCancelable(true);
@@ -480,12 +463,39 @@ public class MainActivity extends BaseActivity
         selectDialog.show();
 
     }
+    public void showSelectBottomSheetPJ(int scanCode) {
+        selectDialog = new BottomSheetDialog(this);
+        selectDialog.setCancelable(true);
+        selectDialog.setCanceledOnTouchOutside(false);
+        selectDialog.setTitle(R.string.please_select_express_no_way);
+
+        View contentView = LayoutInflater.from(this).inflate(R.layout.dialog_bottom_select2, null);
+        initContentView(contentView, scanCode);
+        selectDialog.setContentView(contentView);
+
+        selectDialog.show();
+
+    }
 
     public void initContentView(View contentView, final int scanCode) {
         TextView tvManualInput;
-        TextView tvScanBarcode;
+        TextView tvScanBarcode,tv_scan_gun;
         tvManualInput = contentView.findViewById(R.id.tv_manual_input);
         tvScanBarcode = contentView.findViewById(R.id.tv_scan_barcode);
+
+        //派件
+        if (scanCode == ProcessType.REQUEST_CODE_DELIVERY) {
+            tv_scan_gun = contentView.findViewById(R.id.tv_scan_gun);
+            tv_scan_gun.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    selectDialog.dismiss();
+                    Intent intent = new Intent(MainActivity.this, ScanGunActivity.class);
+                    intent.putExtra("scancode",scanCode);
+                    startActivity(intent);
+                }
+            });
+        }
 
         tvManualInput.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -506,7 +516,7 @@ public class MainActivity extends BaseActivity
                         startActivity(intent);
                     }
                 } else {
-                    //签收，派送
+                    //签收,派送
                     if (requestForCamera(scanCode)) {
                         intent2CaptureActivity(scanCode);
                     }
@@ -519,6 +529,40 @@ public class MainActivity extends BaseActivity
                  selectDialog.dismiss();
              }
          });
+    }
+
+    public void initContentViewSJ(View contentView, final int scanCode) {
+        TextView tvScanGUn;
+        TextView tvScanBarcode,tv_scan_gun;
+        tvScanGUn = contentView.findViewById(R.id.tv_manual_input);
+        tvScanBarcode = contentView.findViewById(R.id.tv_scan_barcode);
+        tvScanGUn.setText(getString(R.string.scan_gun));
+
+        //扫码枪
+        tvScanGUn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectDialog.dismiss();
+                Intent intent = new Intent(MainActivity.this, ScanGunActivity.class);
+                intent.putExtra("scancode",scanCode);
+                startActivity(intent);
+            }
+        });
+        tvScanBarcode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectDialog.dismiss();
+                if (requestForCamera(ProcessType.REQUEST_CODE_REWARD)) {
+                    intent2CaptureActivity(ProcessType.REQUEST_CODE_REWARD);
+                }
+            }
+        });
+        contentView.findViewById(R.id.tv_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectDialog.dismiss();
+            }
+        });
     }
 
     public void showNumberInputDialog(final int scanCode) {
@@ -722,23 +766,6 @@ public class MainActivity extends BaseActivity
                 case ProcessType.REQUEST_CODE_SENDING:      //出货
                     showDialog(ProcessType.REQUEST_CODE_SENDING, result);
                     break;
-//                case ProcessType.REQUEST_CODE_ARRIVEPLACE:      //抵达站所
-//                    if (isDuo) {
-//                        isDuo = false;
-//                        realPackNum = result; //真单号
-//                        showDialogDuo();
-//                    } else {
-//                        showDialog(ProcessType.REQUEST_CODE_ARRIVEPLACE, result);
-//                    }
-//                    break;
-//                case ProcessType.REQUEST_CODE_FAKE_PACK:      //扫描假件返回
-//                    if (!fakePackIds.contains(result)){
-//                        fakePackIds.add(result);
-//                    }else{
-//                        ToastUtils.showShort(R.string.please_do_not_scan_again);
-//                    }
-//                    showDialogDuo();
-//                    break;
                 case ProcessType.REQUEST_CODE_DELIVERY:      //派送
                     showDialog(ProcessType.REQUEST_CODE_DELIVERY, result);
                     break;

@@ -129,7 +129,7 @@ public class CaptureActivity extends AppCompatActivity implements Callback {
 
         //获取从上一界面传来的数据
         processType = getIntent().getIntExtra(AppConstant.PROCESS_TYPE, -1);
-        if (processType == ProcessType.REQUEST_CODE_FAKE_PACK){
+        if (processType == ProcessType.REQUEST_CODE_ARRIVEPLACE_DUO){
             tvScanTitle.setText(R.string.scan_duojian);
         }
 
