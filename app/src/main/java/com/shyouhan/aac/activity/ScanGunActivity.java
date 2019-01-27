@@ -208,7 +208,6 @@ public class ScanGunActivity extends BaseActivity implements FakeContract.View,A
         barcodeList.add(0,new ResultBean(barCode,error,error));
         adapter.notifyDataSetChanged();
     }
-
     @Override
     public void onDeliverySuccess(BaseObject baseObject) {
         playMusic();
