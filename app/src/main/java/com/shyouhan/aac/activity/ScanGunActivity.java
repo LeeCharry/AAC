@@ -215,7 +215,6 @@ public class ScanGunActivity extends BaseActivity implements FakeContract.View,A
         barcodeList.add(0,new ResultBean(barCode,baseObject.getMsg(),baseObject.getTramsg()));
         adapter.notifyDataSetChanged();
     }
-
     @Override
     public void onDeliveryFailed(String error) {
         barcodeList.add(0,new ResultBean(barCode,error,error));
