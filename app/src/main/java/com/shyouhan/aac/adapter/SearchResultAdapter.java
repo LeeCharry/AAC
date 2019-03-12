@@ -50,10 +50,10 @@ public class SearchResultAdapter extends BaseQuickAdapter<PackStatusBean.StatusB
         switch (status) {
             case AppConstant.LANJIAN:
                 tvStatus.setText(R.string.has_reward);
-                if (data.size() > 1) {
-                    ivState.setScaleType(ImageView.ScaleType.FIT_START);
-                    ivState.setImageResource(R.mipmap.ic_big_dot);
-                }
+//                if (data.size() > 1) {
+//                    ivState.setScaleType(ImageView.ScaleType.FIT_START);
+//                    ivState.setImageResource(R.mipmap.ic_big_dot);
+//                }
                 break;
             case AppConstant.SENDING:
                 tvStatus.setText(R.string.has_sending);
