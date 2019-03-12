@@ -12,7 +12,6 @@ import com.shyouhan.aac.widget.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  * 搜索结果
  */
