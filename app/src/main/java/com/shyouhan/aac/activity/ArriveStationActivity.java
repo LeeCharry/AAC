@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.app.AlertDialog;
+import android.text.InputType;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.DigitsKeyListener;
+import android.text.method.KeyListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -133,13 +136,13 @@ public class ArriveStationActivity extends BaseActivity implements ArrivePlaceCo
     }
 
     public void showNumberInputDialog(final int scanCode) {
-               final EditText editText1 = new EditText(this);
-        editText1.setKeyListener(DigitsKeyListener.getInstance("1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"));
+        final EditText editText1 = new EditText(this);
+//        editText1.setKeyListener(DigitsKeyListener.getInstance("1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"));
         editText1.setHint(R.string.please_input_express_number);
+
         editText1.setTextColor(getResources().getColor(R.color.dark_gray));
         editText1.setTextSize(16);
         editText1.setPadding(0,20,0,20);
-
         AlertDialog.Builder builder = new AlertDialog.Builder(ArriveStationActivity.this)
                 .setCustomTitle(LayoutInflater.from(this).inflate(R.layout.custom_title, null));
 

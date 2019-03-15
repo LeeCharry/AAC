@@ -17,6 +17,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
+import android.text.InputType;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.DigitsKeyListener;
 import android.view.LayoutInflater;
@@ -568,10 +570,11 @@ public class MainActivity extends BaseActivity
     public void showNumberInputDialog(final int scanCode) {
         final EditText editText = new EditText(this);
         editText.setHint(R.string.please_input_express_number);
-        editText.setKeyListener(DigitsKeyListener.getInstance("1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"));
+//        editText.setKeyListener(DigitsKeyListener.getInstance("1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"));
         editText.setTextColor(getResources().getColor(R.color.dark_gray));
         editText.setTextSize(16);
         editText.setPadding(0,20,0,20);
+
 
         new AlertDialog.Builder(MainActivity.this)
                 .setCustomTitle(LayoutInflater.from(this).inflate(R.layout.custom_title,null))
