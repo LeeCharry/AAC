@@ -167,6 +167,7 @@ public class ArriveStationActivity extends BaseActivity implements ArrivePlaceCo
         }else{
             builder .setView(editText1);
         }*/
+
         if (scanCode == ProcessType.REQUEST_CODE_ARRIVEPLACE_DUO){
             editText1.setHint(R.string.please_input_fake_express_number);
         }
