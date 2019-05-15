@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 
-
 import com.example.tulib.util.base.BasePresenter;
 import com.shyouhan.aac.R;
 import com.shyouhan.aac.activity.LoginActivity;
