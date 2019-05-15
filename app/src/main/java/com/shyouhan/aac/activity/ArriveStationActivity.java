@@ -116,9 +116,7 @@ public class ArriveStationActivity extends BaseActivity implements ArrivePlaceCo
             @Override
             public void onClick(View v) {
                 selectDialog.dismiss();
-
                 intent2ScanGunActivity(scanCode);
-
             }
         });
         contentView.findViewById(R.id.tv_cancel).setOnClickListener(new View.OnClickListener() {
