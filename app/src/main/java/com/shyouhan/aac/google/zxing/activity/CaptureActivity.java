@@ -116,7 +116,6 @@ public class CaptureActivity extends AppCompatActivity implements ArrivePlaceCon
 
     private ArrivePlacePresenter arrivePlacePresenter;  //抵达站点
     private FakePresenter fakePresenter;  //假单
-
     /**
      * Called when the activity is first created.
      */
