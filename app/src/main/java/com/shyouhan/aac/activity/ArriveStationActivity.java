@@ -72,8 +72,11 @@ public class ArriveStationActivity extends BaseActivity implements ArrivePlaceCo
         Intent intent = new Intent(ArriveStationActivity.this, CaptureActivity.class);
         if (code == ProcessType.REQUEST_CODE_ARRIVEPLACE_DUO) {
             intent.putExtra(AppConstant.PROCESS_TYPE, ProcessType.REQUEST_CODE_ARRIVEPLACE_DUO);
+        }else{
+            intent.putExtra(AppConstant.PROCESS_TYPE, ProcessType.REQUEST_CODE_ARRIVEPLACE_DAN);
         }
-        startActivityForResult(intent, code);
+//        startActivityForResult(intent, code);
+        startActivity(intent);
     }
 
     public void showSelectBottomSheet(int scanCode) {
@@ -135,7 +138,7 @@ public class ArriveStationActivity extends BaseActivity implements ArrivePlaceCo
 
     public void showNumberInputDialog(final int scanCode) {
         final EditText editText1 = new EditText(this);
-//        editText1.setKeyListener(DigitsKeyListener.getInstance("1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"));
+//      editText1.setKeyListener(DigitsKeyListener.getInstance("1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"));
         editText1.setHint(R.string.please_input_express_number);
 
         editText1.setTextColor(getResources().getColor(R.color.dark_gray));
@@ -179,11 +182,6 @@ public class ArriveStationActivity extends BaseActivity implements ArrivePlaceCo
                         String result1 = editText1.getText().toString().trim();
                         if (scanCode == ProcessType.REQUEST_CODE_ARRIVEPLACE_DUO){
                             //多件
-//                            String result2 = editText2.getText().toString().trim();
-//                            if (!TextUtils.isEmpty(result1) && !TextUtils.isEmpty(result2)) {
-//                                arrivePlacePresenter.arrivePlace(result1,result2);
-//                            }
-
                             if (!TextUtils.isEmpty(result1)) {
                                 fakePresenter.fake(result1);
                             }
@@ -215,19 +213,8 @@ public class ArriveStationActivity extends BaseActivity implements ArrivePlaceCo
                     showDialogDan(result,requestCode);
                     break;
                 case ProcessType.REQUEST_CODE_ARRIVEPLACE_DUO:
-//                    realPackNum = result;
-//                    showDialogDuo1(result);
-
                     showDialogDan(result,requestCode);
                     break;
-//                case ProcessType.REQUEST_CODE_FAKE_PACK:
-//                    if (!fakePackIds.contains(result)){
-//                        fakePackIds.add(result);
-//                    }else{
-//                        ToastUtils.showShort(R.string.please_do_not_scan_again);
-//                    }
-//                    showDialogDuo(result);
-//                    break;
             }
         }
     }
@@ -305,12 +292,12 @@ public class ArriveStationActivity extends BaseActivity implements ArrivePlaceCo
         showdialog(ArriveStationActivity.this, string1 + result + "\r\n" + string2, new CallBack() {
             @Override
             public void onConfirm() {
-                if (requestCode == ProcessType.REQUEST_CODE_ARRIVEPLACE_DUO) {
-                    //假单扫描
-                    fakePresenter.fake(result);
-                }else{
-                    arrivePlacePresenter.arrivePlace(result,"");
-                }
+//                if (requestCode == ProcessType.REQUEST_CODE_ARRIVEPLACE_DUO) {
+//                    //假单扫描
+//                    fakePresenter.fake(result);
+//                }else{
+//                    arrivePlacePresenter.arrivePlace(result,"");
+//                }
             }
 
             @Override

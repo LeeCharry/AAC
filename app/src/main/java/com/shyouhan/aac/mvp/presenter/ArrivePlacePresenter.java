@@ -54,7 +54,7 @@ public class ArrivePlacePresenter extends BasePresenter<ArrivePlaceContract.Mode
                 .retryWhen(new RetryWithDelay(3, 2))//遇到错误时重试,第一个参数为重试几次,第二个参数为重试的间隔
                 .compose(XXApi.<BaseObject>getApiTransformer())
                 .compose(XXApi.<BaseObject>getScheduler())
-                .compose(bindToLifecycle(mRootview))//使用RXlifecycle,使subscription和activity一起销毁
+//                .compose(bindToLifecycle(mRootview))//使用RXlifecycle,使subscription和activity一起销毁
                 .subscribe(new ErrorHandleSubscriber<BaseObject>(mErrorHandler) {
                     @Override
                     public void onNext(BaseObject baseObject) {

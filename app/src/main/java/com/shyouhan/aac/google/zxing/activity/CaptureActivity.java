@@ -2,6 +2,7 @@ package com.shyouhan.aac.google.zxing.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -29,6 +30,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
@@ -55,18 +57,27 @@ import com.google.zxing.common.HybridBinarizer;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
 
 import com.shyouhan.aac.ProcessType;
 import com.shyouhan.aac.R;
+import com.shyouhan.aac.activity.DoSuccessActivity;
 import com.shyouhan.aac.activity.DomesticTransferActivity;
 import com.shyouhan.aac.activity.MainActivity;
+import com.shyouhan.aac.base.BaseActivity;
+import com.shyouhan.aac.bean.BaseObject;
 import com.shyouhan.aac.constant.AppConstant;
 import com.shyouhan.aac.google.zxing.camera.CameraManager;
 import com.shyouhan.aac.google.zxing.decoding.CaptureActivityHandler;
 import com.shyouhan.aac.google.zxing.decoding.InactivityTimer;
 import com.shyouhan.aac.google.zxing.view.ViewfinderView;
+import com.shyouhan.aac.mvp.contract.ArrivePlaceContract;
+import com.shyouhan.aac.mvp.contract.FakeContract;
+import com.shyouhan.aac.mvp.presenter.ArrivePlacePresenter;
+import com.shyouhan.aac.mvp.presenter.FakePresenter;
 import com.shyouhan.aac.widget.LogUtils;
 import com.shyouhan.aac.widget.ToastUtils;
 
@@ -76,7 +87,7 @@ import com.shyouhan.aac.widget.ToastUtils;
  *
  * @author Ryan.Tang
  */
-public class CaptureActivity extends AppCompatActivity implements Callback {
+public class CaptureActivity extends AppCompatActivity implements ArrivePlaceContract.View,FakeContract.View,Callback {
 
     private static final int REQUEST_CODE_SCAN_GALLERY = 100;
     private static final int PERMISSION_REQUEST_CODE_WRITE_EXTERNAL_STORAGE = 1001;
@@ -103,6 +114,9 @@ public class CaptureActivity extends AppCompatActivity implements Callback {
     private int processType = -1;
     private TextView tvScanTitle;
 
+    private ArrivePlacePresenter arrivePlacePresenter;  //抵达站点
+    private FakePresenter fakePresenter;  //假单
+
     /**
      * Called when the activity is first created.
      */
@@ -113,6 +127,7 @@ public class CaptureActivity extends AppCompatActivity implements Callback {
         //ViewUtil.addTopView(getApplicationContext(), this, R.string.scan_card);
         CameraManager.init(getApplication());
 
+        initPresenter();
         setImmersiveStatus(this);
         tvScanTitle = findViewById(R.id.tv_scan_title);
         viewfinderView = findViewById(R.id.viewfinder_content);
@@ -167,6 +182,11 @@ public class CaptureActivity extends AppCompatActivity implements Callback {
                 }
             }
         });
+    }
+
+    private void initPresenter() {
+        arrivePlacePresenter = new ArrivePlacePresenter(this,this);
+        fakePresenter = new FakePresenter(this,this);
     }
 
     @Override
@@ -417,6 +437,10 @@ public class CaptureActivity extends AppCompatActivity implements Callback {
             Intent intent = new Intent(this, DomesticTransferActivity.class);
             intent.putExtra(INTENT_EXTRA_KEY_QR_SCAN, resultString);
             startActivity(intent);
+            CaptureActivity.this.finish();
+        } else if (processType == ProcessType.REQUEST_CODE_ARRIVEPLACE_DAN || processType == ProcessType.REQUEST_CODE_ARRIVEPLACE_DUO) {
+            //到达站点 ，单多件扫描
+            showDialogDan(resultString,processType);
         } else {
             Intent resultIntent = new Intent();
             Bundle bundle = new Bundle();
@@ -425,8 +449,60 @@ public class CaptureActivity extends AppCompatActivity implements Callback {
             // 不能使用Intent传递大于40kb的bitmap，可以使用一个单例对象存储这个bitmap
             resultIntent.putExtras(bundle);
             this.setResult(RESULT_CODE_QR_SCAN, resultIntent);
+            CaptureActivity.this.finish();
         }
-        CaptureActivity.this.finish();
+
+    }
+    //单件多件，到达底站
+    private void showDialogDan(final String result, final int requestCode) {
+        String string1 = "";
+        String string2 = "";
+        string1 = getString(R.string.waybill_no3) + " ";
+        string2 = getString(R.string.is_sure_to_arriveplace);
+        showdialog(CaptureActivity.this, string1 + result + "\r\n" + string2, new BaseActivity.CallBack() {
+            @Override
+            public void onConfirm() {
+                if (requestCode == ProcessType.REQUEST_CODE_ARRIVEPLACE_DUO) {
+                    //假单扫描
+                    fakePresenter.fake(result);
+                }else{
+                    arrivePlacePresenter.arrivePlace(result,"");
+                }
+            }
+
+            @Override
+            public void onSelect(View view) {
+
+            }
+        });
+    }
+    private Dialog dialog;
+    protected void showdialog(Context context,String message, final BaseActivity.CallBack callBack) {
+        View contentView = LayoutInflater.from(context).inflate(R.layout.dialog_logout_common, null);
+        TextView tvMessage = contentView.findViewById(R.id.tv_message);
+        tvMessage.setText(message+"");
+        dialog = new Dialog(context, R.style.style_logout_dialog);
+        // 确定
+        contentView.findViewById(R.id.tv_confirm).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                if (null != callBack) {
+                    callBack.onConfirm();
+                }
+            }
+        });
+        //取消
+        contentView.findViewById(R.id.tv_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.setContentView(contentView);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
     }
 
     private void initCamera(SurfaceHolder surfaceHolder) {
@@ -552,4 +628,59 @@ public class CaptureActivity extends AppCompatActivity implements Callback {
         }
     };
 
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showMessage(String msg) {
+        ToastUtils.showShort(msg);
+    }
+
+    @Override
+    public void launchActivity(Intent intent) {
+
+    }
+
+    @Override
+    public void killMySelf() {
+
+    }
+    List<String> fakePackIds = new ArrayList<>();
+    private String realPackNum = "";
+    @Override
+    public void onArrivePlaceSuccess(BaseObject baseObject) {
+        realPackNum = "";
+        fakePackIds.clear();
+        Intent intent = new Intent(CaptureActivity.this, DoSuccessActivity.class);
+        intent.putExtra(AppConstant.PROCESS_TIME, baseObject.getTime());
+        intent.putExtra(AppConstant.PROCESS_TYPE, ProcessType.REQUEST_CODE_ARRIVEPLACE);
+        startActivity(intent);
+        this.finish();
+    }
+
+    @Override
+    public void onArrivePlaceFailed(String error) {
+        showMessage(error);
+    }
+
+    @Override
+    public void onFakeSuccess(BaseObject baseObject) {
+        Intent intent = new Intent(CaptureActivity.this, DoSuccessActivity.class);
+        intent.putExtra(AppConstant.PROCESS_TIME, baseObject.getTime());
+        intent.putExtra(AppConstant.PROCESS_TYPE, ProcessType.REQUEST_CODE_ARRIVEPLACE);
+        startActivity(intent);
+        this.finish();
+    }
+
+    @Override
+    public void onFakeFailed(String error) {
+        showMessage(error);
+    }
 }
