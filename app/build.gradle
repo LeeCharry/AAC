@@ -7,8 +7,8 @@ android {
         applicationId "com.shyouhan.aac"
         minSdkVersion 17
         targetSdkVersion 27
-        versionCode 8
-        versionName "1.0.8"
+        versionCode 9
+        versionName "1.0.9"
         //只保留中文简体和中文繁体
         resConfigs "zh","zh-rTW"
     }

@@ -252,11 +252,15 @@ public class CaptureActivity extends AppCompatActivity implements ArrivePlaceCon
                             result = reader.decode(binaryBitmap);
                             if (null == result) {
                                 showToastAtCenter(getString(R.string.shibie_failed));
+                                //设置继续扫描
+                                continueScan();
                                 return;
                             }
                             String s = result.getText().toString();
                             if (s.contains("http://") || s.contains("https://")) {
                                 showToastAtCenter(getString(R.string.shibie_failed));
+                                //设置继续扫描
+                                continueScan();
                                 return;
                             }
                             LogUtils.a(AppConstant.TAG, result.getText());
@@ -276,6 +280,8 @@ public class CaptureActivity extends AppCompatActivity implements ArrivePlaceCon
                             Log.i(AppConstant.TAG, "onActivityResult: notFind");
                             showToastAtCenter(getString(R.string.shibie_failed));
                             e.printStackTrace();
+                            //设置继续扫描
+                            continueScan();
                         } catch (ChecksumException e) {
                             e.printStackTrace();
                         } catch (FormatException e) {
@@ -428,9 +434,13 @@ public class CaptureActivity extends AppCompatActivity implements ArrivePlaceCon
         //FIXME
         if (resultString.contains("http://") || resultString.contains("https://")) {
             showToastAtCenter(getString(R.string.shibie_failed));
+            //设置继续扫描
+            continueScan();
             return;
         } else if (TextUtils.isEmpty(resultString)) {
             showToastAtCenter(getString(R.string.shibie_failed));
+            //设置继续扫描
+            continueScan();
         } else if (processType == ProcessType.REQUEST_CODE_TRANSFER) {
             //中转国内快递
             Intent intent = new Intent(this, DomesticTransferActivity.class);
@@ -452,6 +462,30 @@ public class CaptureActivity extends AppCompatActivity implements ArrivePlaceCon
         }
 
     }
+
+    private Handler mHandler = new Handler();
+    private  Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            // handler自带方法实现定时器
+            try {
+                if (handler != null)
+//                    mHandler.postDelayed(runnable, 3000);
+                handler.restartPreviewAndDecode(); // 实现多次扫描
+                System.out.println("do...");
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                System.out.println("exception...");
+            }
+        }
+    };
+    //设置继续扫描
+    private void continueScan() {
+    mHandler.postDelayed(runnable,3000);
+
+    }
+
     //单件多件，到达底站
     private void showDialogDan(final String result, final int requestCode) {
         String string1 = "";
@@ -496,6 +530,8 @@ public class CaptureActivity extends AppCompatActivity implements ArrivePlaceCon
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                //设置继续扫描
+                continueScan();
             }
         });
         dialog.setContentView(contentView);
@@ -667,6 +703,8 @@ public class CaptureActivity extends AppCompatActivity implements ArrivePlaceCon
     @Override
     public void onArrivePlaceFailed(String error) {
         showMessage(error);
+        //设置继续扫描
+        continueScan();
     }
 
     @Override
@@ -681,5 +719,7 @@ public class CaptureActivity extends AppCompatActivity implements ArrivePlaceCon
     @Override
     public void onFakeFailed(String error) {
         showMessage(error);
+        //设置继续扫描
+        continueScan();
     }
 }
